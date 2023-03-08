@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}{% block content %} {% load i18n %} {% block pageclass %} {% endblock %} {% load staticfiles static %}
+<title>Link expired</title>
+<div class="content-wrapper">
+<div class="content">
+    <div class="form-wrapper">
+        <h1 class="text-center">Link Expired</h1>
+        <h2 class="w-auto mx-auto text-center">This link has been expired!</h2>
+        <form class="mt-4 sign-up">
+            <div class="navbar-text">
+                <a href="{% url 'accounts:login' %}" class="btn btn-primary" >Login</a>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+
+{% endblock %}

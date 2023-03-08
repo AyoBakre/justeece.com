@@ -1,0 +1,290 @@
+{% extends 'layout.html' %}{% load static %}
+{% block extrastyles %}
+ 
+  <style>
+    .form-wrapper{
+      margin-top: 200px;
+      margin-bottom: 200px;
+    }
+
+    .terms-bold{
+      font-size: 16px;
+      font-weight: bolder;
+    }
+
+  </style>
+
+{% endblock %}
+{% block content %}
+    <div class="content-wrapper">
+      <div class="container">
+        <div class="d-flex flex-column justify-content-center wrapper-form">
+          <div>
+            {% if 'providers' in request.path  %}
+              {% include 'accounts/provider.html' %}
+            {% elif 'vendors' in request.path %}
+              {% include 'accounts/vendors.html'%}
+            {% endif %}
+          </div>
+          <div class="form-wrapper">
+            {% if 'providers' in request.path %}
+              <h2 class="form-header">Registration required</h2>
+            {% else %}
+            <h2 class="form-header">Registration Required</h2>
+            {% endif %}
+            <form method="POST" action="" class="register-form">
+              {% csrf_token %}
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="fname"
+                  name="{{form.first_name.name}}"
+                  placeholder="First Name"
+                  class="form-field form-control"
+                  value="{% if form.first_name.value %}{{form.first_name.value}}{% endif %}"
+                />
+              </div>
+              <div class="invalid-tooltip-message text-danger"> {{form.first_name.errors.0}} </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="lname"
+                  name="{{form.last_name.name}}"
+                  placeholder="Last Name"
+                  class="form-field form-control"
+                  value="{% if form.last_name.value %}{{form.last_name.value}}{% endif %}"
+                />
+              </div>
+              <div class="invalid-tooltip-message text-danger"> {{form.last_name.errors.0}} </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="femail"
+                  name="{{form.email.name}}"
+                  placeholder="Email"
+                  class="form-field form-control"
+                  value="{% if form.email.value %}{{form.email.value}}{% endif %}"
+                />
+              </div>
+              <div class="invalid-tooltip-message text-danger"> {{form.email.errors.0}} </div>
+              <div class="form-group">
+                <input
+                  type="password"
+                  id="fpassword"
+                  name="{{form.password.name}}"
+                  placeholder="Create a password"
+                  class="form-field form-control"
+                />
+              </div>
+              <div class="invalid-tooltip-message text-danger"> {{form.password.errors.0}} </div>
+              <div class="terms-condition-div">
+                  <p style="text-align: center; text-decoration:underline">
+                    Welcome to Justeece.com <br><br>
+                  </p>
+                  <p>
+              
+The following terms of service (these <span class="terms-bold">"Terms of Service"</span> ), govern your access to and use of the Justeece website and mobile application, including any content, functionality and services offered on or through www.Justeece.com or the Justeece mobile application (the "Site") by Linuxjobber, Inc. (6301 Ivy Lane, Greenbelt, MD20770) referred hereto as "Justeece" "we" or "us" and “you” or “user” means you as a user of the Site.
+<br><br>
+Please read the Terms of Service carefully before you start to use the Site. 
+<span class="terms-bold">By using the Site, opening an account or by clicking to accept or agree to the Terms of Service when this option is made available to you, you accept and agree, on behalf of yourself or on behalf of your employer or any other entity (if applicable), to be bound and abide by these Terms of Service and Justeece Payment Terms, which may be incorporated herein by reference. You further acknowledge, you have read and understood our Privacy Policy. If you do not want to agree to these Terms of Service or the Privacy Policy, you must not access or use the Site. For more detailed policies surrounding the activity and usage on the Site, please contact admin@Justeece.com.
+</span>  
+<br><br>
+This Site is offered and available to users who are at least 18 years of age and of legal age to form a binding contract. If you are under 18 and at least 13 years of age, you are only permitted to use the Site through an account owned by a parent or legal guardian with their appropriate permission. If you are under 13 you are not permitted to use the Site or the Justeece services. By using the Site, you represent and warrant that you meet all of the foregoing eligibility requirements. If you do not meet all of these requirements, you must not access or use the Site.
+<br><br>
+Our Customer Support team is available 24/7 if you have any questions regarding the Site or Terms of Service. Contact customer service at customerservice@justeece.com
+<br><br>
+
+The original language of these Terms of Service, as well as all other texts throughout the Site, is English. Justeece makes this translation available for convenience only. In case of conflicts between the original English version and any translation, the English version shall prevail.
+<br><br>
+
+<span class="terms-bold">Key Terms</span><br><br>
+Buyers are users who purchase services on Justeece.
+<br><br>
+Business Account is a collaborative Buyer account, created via Justeece Business, as detailed on Justeece Business Terms of Service. <br><br>
+Business Account Team Member or Team Member is any user that is invited or uses a Business Account. <br><br>
+Custom Contracts are exclusive proposals that a Seller can create for the purpose of sending to a specific Buyer. <br><br>
+Custom Contracts are created by a Buyer to be delivered to a specific Seller. Maker. <br><br>
+Contracts are the formal agreements between a Buyer and Seller. <br><br>
+Sellers are users who offer and perform services on Justeece <br><br>
+<span class="terms-bold">
+Overview (Main terms, in a nutshell)</span><br><br>
+Only registered users may buy and sell on Justeece. Registration is free. In registering for an account, you agree to provide us with accurate, complete and updated information and must not create an account for fraudulent or misleading purposes. You are solely responsible for any activity on your account and for maintaining the confidentiality and security of your password. We are not liable for any acts or omissions by you in connection with your account.
+<br><br>
+Service prices are determined by the Seller.
+<br><br>
+Buyers pay a 3% processing fee for all payments made through Justeece.<br><br>
+Sellers must fulfill their orders, and may not cancel orders on a regular basis or without cause. Cancelling orders will affect Sellers’ reputation and status.
+<br><br>
+Sellers gain account statuses (Levels) based on their performance and reputation. Advanced levels provide their owners with benefits.
+<br><br>
+When purchasing a contract, Buyers are granted all rights for the delivered work, unless otherwise specified by the Seller on their contract page. 
+<br><br>
+Justeece retains the right to use all published delivered works and Logo Designs for Justeece marketing and promotion purposes.
+<br><br>
+Users undertake to comply with Justeece’s Community Standards, which are a set of behaviors, rules and regulations applicable to the Justeece community and marketplace in addition to these Terms of Service, as updated from time to time.
+<br><br>
+<span class="terms-bold">SELLERS </span>
+<br><br>
+<span class="terms-bold">Basics </span>
+Sellers use template contracts on Justeece to allow Buyers to purchase their services.<br><br>
+Sellers may also offer Custom contracts to Buyers.<br><br>
+Each contract you successfully complete, accredits your account with a revenue equal to 90% of the purchase amount.<br><br>
+Justeece accredits Sellers once an order is completed. See our "Orders" section below for a definition of a completed order.<br><br>
+<br><br>For more information about receiving payments, fees and taxes contact admin@Justeece.com.<br><br>
+<br><br>The Seller's rating is calculated based on the order reviews posted by Buyers or Business Account Team Members. High ratings allow Sellers to obtain advanced Seller levels (see Levels below). In certain cases, exceedingly low ratings may lead to the suspension of the Seller’s account.
+<br><br>For security concerns, Justeece may temporarily disable a Seller’s ability to withdraw revenue to prevent fraudulent or illicit activity. This may come as a result of security issues, improper behavior reported by other users, or associating multiple Justeece accounts to a single withdrawal provider.
+<br><br>Sellers are responsible for obtaining a general liability insurance policy with coverage amounts that are sufficient to cover all risks associated with the performance of their services.
+
+<br><br><span class="terms-bold">Levels</span>
+<br><br>Justeece is all about helping buyers and Sellers maintain trust. We seek to empower top performing Sellers maintain a good online reputation so that they can get more business online. Sellers who invest in self-promotion may achieve greater customer satisfaction. And, if they deliver on time and maintain high quality and ratings, Justeece may reward them with new statuses, special opportunities, benefits, and tools that come with it.
+<br><br>Justeece Sellers can gain account Levels based on their activity, performance and reputation.
+<br><br>Advancement in Levels are updated periodically by an automated system.
+<br><br>A seller’s level is automatically incremented after every 2 successful contract completions until the seller becomes ‘Top Rated’.
+<br><br>The current Levels a Seller can achieve are, Level 1, 2, 3, 4, and Top Rated.
+<br><br>Sellers who cannot maintain their high quality service, experience a severe drop in ratings, or stop delivering on time risk losing their Seller status and the benefits that come with it. For example, late deliveries, warnings to the Seller’s account and cancellations can cause a Seller to move to a different Level.
+<br><br> <span class="terms-bold">Top Rated Sellers</span>
+<br><br>Top Rated Sellers are chosen manually by Justeece editors through an ongoing review process based on seniority, volume of sales, extremely high ratings, exceptional customer care, high order completion rate and community leadership. Top Rated Sellers gain access to more extensive features than previous levels, including exclusive access to beta features and VIP support.
+<br><br>Top Rated eligibility is constantly evaluated by Justeece to ensure that the quality standards and expectations of the Top Rated selection is kept. Justeece retains the right to change a Top Rated Seller status in light of such evaluation. In addition, Top Rated Sellers who cannot maintain their high quality service through a severe drop in ratings, stop delivering on time, increased cancellation rate or violate our Terms of Service and/or our Community Standards, also risk losing their Top Rated status and the benefits that come with it.
+<br><br><span class="terms-bold">Pro Sellers </span>
+<br><br>Pro Sellers are pre-verified professionals who undergo a vetting process by Justeece editors. Applying for Justeece Pro is open to everyone: professional service providers who are new to Justeece, as well as existing Justeece Sellers.
+<br><br>Pro Sellers eligibility is constantly evaluated by Justeece to ensure that the quality standards and expectations of the Pro Seller selection is kept. Justeece retains the right to change a Pro Seller status in light of such evaluation. In addition, Pro Sellers who cannot maintain their high quality service through a severe drop in ratings, stop delivering on time, increased cancellation rate or violate our Terms of Service, also risk losing their Pro status and the benefits that come with it.
+
+
+<br><br><span class="terms-bold">Seller Features</span>
+<br><br>Justeece Sellers have access to several exclusive features that help customize the way their services can be offered.
+<br><br>Custom Contracts
+<br><br>Sellers can also send Custom contracts addressing specific requirements of a Buyer.
+<br><br>Custom contracts are defined by the Seller with the exact description of the service, the price and the time expected to deliver the service.
+<br><br>Custom contracts are sent from the Custom Contracts page.
+<br><br>Services provided through Custom contracts may not violate Justeece’s Terms of Service and/or our Community Standards.
+
+
+
+
+<br><br><span class="terms-bold">Shipping Physical Deliverables </span>
+<br><br>Some of the services on Justeece are delivered physically (arts and crafts, collectable items, etc.). For these types of contracts, Sellers may decide to define a shipping pricing factor.
+<br><br>Contracts that include a shipping pricing factor must have physical deliverables sent to Buyers.
+<br><br>Shipping costs added to a contracts only pertains to the cost Sellers require to ship physical items to Buyers.
+<br><br>Important: Buyers who purchase using contracts that require physical delivery, will be asked to provide a shipping address.
+<br><br>Sellers are responsible for all shipping arrangements once the Buyer provides the shipping address.
+<br><br>Justeece does not handle or guarantee shipping, tracking, quality, and condition of items or their delivery and shall not be responsible or liable for any damages or other problems resulting from shipping.
+<br><br>A tracking number is a great way to avoid disputes related to shipping. We require entering the tracking number if available when delivering your work.
+
+
+<br><br><span class="terms-bold">BUYERS </span>
+<br><br><span class="terms-bold">Basics </span>
+<br><br>Justeece retains the right to use all publicly published delivered works for Justeece marketing and promotional purposes.
+<br><br> <span class="terms-bold">Purchasing </span>
+<br><br>Buyers can request a Custom contracts which addresses specific Buyer requirements, and receive a Custom contracts from Sellers through the site.
+
+
+<br><br><span class="terms-bold">Reviews</span>
+<br><br>Feedback reviews provided by Buyers while completing an contract are an essential part of Justeece’s rating system. Reviews demonstrate the Buyer's overall experience with the Sellers and their service. Buyers are encouraged to communicate to the Seller any concerns experienced during their active order in regards to the service provided by the Seller.
+<br><br>Leaving a Buyer's feedback is a basic prerogative of a Buyer. Feedback reviews will not be removed unless there are clear violations of our Terms of Service and/or our Community Standards.
+<br><br>To prevent any misuse of our Feedback system, all feedback reviews must come from legitimate sales executed exclusively through the Justeece platform from users within our Community. Purchases arranged, determined to artificially enhance Seller ratings, or to abuse the Justeece platform with purchases from additional accounts, will result in a permanent suspension of all related accounts.
+<br><br>Feedback comments given by Buyers are publicly displayed on a Seller’s contract page.
+
+<br><br>Withholding the delivery of services, files, or information required to complete the contract service with the intent to gain favorable reviews or additional services is prohibited.
+<br><br>Responding and posting a review: Once work is delivered, the Buyer has three days to respond. If no response is provided within the response period, the contract will be considered completed.
+<br><br>Users are allowed to leave reviews on contracts up to 10 days after an contracts is marked as complete. No new reviews may be added to an Order after 10 days.
+<br><br>Sellers may not solicit the removal of feedback reviews from their Buyers through mutual cancellations.
+<br><br>Once the Buyer submits his/her review, the Seller will receive a notification and will also have the opportunity to leave a review about working with the Buyer. Please Note: At this stage, Sellers cannot see the Buyer's review.
+<br><br>Once both Seller and Buyer have completed their reviews, or the 10 days have passed, all posted reviews are made public.
+<br><br>Responding to a review: Once both reviews from the Buyer and Seller have been published, the Seller can reply to the Buyer’s review from the Order page, seen on the Seller’s page, beneath the Buyer’s feedback.
+
+
+<br><br><span class="terms-bold">Disputes and Cancellations </span>
+<br><br>We encourage our Buyers and Sellers to try and settle conflicts amongst themselves. If for any reason this fails after using the Resolution Center or if you encounter non-permitted usage on the Site, users can contact Justeece’s Customer Support department for assistance.
+
+<br><br>In the event of disputes, any decision made by  Justeece will be accepted by both the Buyer and Seller as the final decision concerning the contract.
+
+
+<br><br><span class="terms-bold">User Conduct and Protection</span>
+<br><br>Justeece enables people around the world to create, share, sell and purchase nearly any service they need. Services offered on Justeece reflect the diversity of an expanding Contract economy. Members of the Justeece community communicate and engage through orders, social media, and on Justeece’s Community Forums.
+<br><br>Justeece maintains a friendly, community spirited, and professional environment. Users should keep to that spirit while participating in any activity or extensions of Justeece. This section relates to the expected conduct users should adhere to while interacting with each other on Justeece.
+<br><br>To report a violation of our Terms of Service and/or our Community Standards, User Misconduct, or inquiries regarding your account, please contact our Customer Support team.
+<br><br>Basics
+<br><br>Any necessary exchange of personal information required to continue a service may be exchanged within the Contract Page.
+<br><br>Justeece does not provide any guarantee of the level of service offered to Buyers. You may use the dispute resolution tools provided to you in the contract Page.
+<br><br>Justeece does not provide protection for users who interact outside of the Justeece platform.
+<br><br>All information and file exchanges must be performed exclusively on Justeece’s platform.
+Rude, abusive, improper language, or violent messages will not be tolerated and may result in an account warning or the suspension/removal of your account.<br><br>
+<br><br>Justeece is open to everyone. You undertake not to discriminate against any other user based on gender, race, age, religious affiliation, sexual orientation or otherwise and you acknowledge that such discrimination may result in the suspension/removal of your account.
+
+
+<br><br><span class="terms-bold">Orders</span>
+<br><br> Users with the intention to defame competing Sellers by ordering from competing services will have their reviews removed or further account status related actions determined by review by our Tr<br><br>ust & Safety team.
+<br><br>Users are to refrain from spamming or soliciting previous Buyers or Sellers to pursue removing/modifying reviews or cancelling orders that do not align on Order Cancellation or Feedback policies.
+
+<br><br>
+<br><br><span class="terms-bold">Contracts </span>
+<br><br>Users may report contracts to Customer Support that may be in violation of Justeece’s Terms of Service based on the reported contract’s replicated similarity to pre-existing services.<br><br>
+<br><br>Sellers warrant that any content included in their contracts shall be original work conceived by the Sellers and shall not infringe any third party rights, including, without limitation, copyrights, trademarks or service marks. In the event that certain music or stock-footage media are incorporated within the contract’s, Sellers represent and warrant that they hold a valid license to use such music and/or footage and to include them in the contracts.
+
+
+<br><br><span class="terms-bold">Reporting Violations</span>
+<br><br>If you come across any content that may violate our Terms of Service and/or our Community Standards, you should report it to us through the appropriate channels created to handle those issues as outlined in our Terms of Service. All cases are reviewed by our Trust & Safety team. To protect individual privacy, the results of the investigation are not shared. You can review our Privacy Policy for more information.
+<br><br><span class="terms-bold">Violations</span>
+<br><br>Users may receive a warning to their account for violations of our Terms of Service and/or our Community Standards or any user misconduct reported to our Trust and Safety team. A warning will be sent to the user's email address and will be displayed for such user on the Site. Warnings do not limit account activity, but can lead to your account losing Seller statuses or becoming permanently disabled based on the severity of the violation.
+
+
+<br><br><span class="terms-bold">Non-Permitted Usage</span>
+<br><br><span class="terms-bold">Adult Services & Pornography </span>- Justeece does not allow any exchange of adult oriented or pornographic materials and services.
+<br><br><span class="terms-bold">Inappropriate Behavior & Language </span>- Communication on Justeece should be friendly, constructive, and professional. Justeece condemns bullying, harassment, and hate speech towards others. We allow users a medium for which messages are exchanged between individuals, a system to rate orders, and to engage on larger platforms such as our Community Forum and Social Media pages.
+<br><br><span class="terms-bold">Phishing and Spam </span> - Members’ security is a top priority. Any attempts to publish or send malicious content with the intent to compromise another member’s account or computer environment is strictly prohibited. Please respect our members privacy by not contacting them with offers, questions, suggestions or anything which is not directly related to their contracts.
+<br><br><span class="terms-bold">Fraud / Unlawful Use </span> - You may not use Justeece for any unlawful purposes or to conduct illegal activities.
+<br><br><span class="terms-bold">Abuse and Spam </span>
+<br><br><span class="terms-bold">Multiple Accounts </span>- To prevent fraud and abuse, users are limited to one active Justeece account and one active Justeece Business account. Any additional account determined to be created to circumvent guidelines, promote competitive advantages, or mislead the Justeece community will be disabled. Mass account creation may result in disabling of all related accounts. Note: any violations of Justeece’s Terms of Service and/or our Community Standards is a cause for permanent suspension of all accounts.
+<br><br><span class="terms-bold">Targeted Abuse </span> - We do not tolerate users who engage in targeted abuse or harassment towards other users on Justeece. This includes creating new multiple accounts to harass members through our message or ordering system.
+<br><br><span class="terms-bold">Selling Accounts</span> - You may not buy or sell Justeece accounts.
+
+<br><br><span class="terms-bold">Feedback Rights</span>
+<br><br>To the extent that you provide Justeece with any comments, suggestions or other feedback regarding the Justeece platform or the Site as a whole, as well as other Justeece products or services (collective, the “Feedback”), you will be deemed to have granted Justeece an exclusive, royalty-free, fully paid up, perpetual, irrevocable, worldwide ownership rights in the Feedback. Justeece is under no obligation to implement any Feedback it may receive from users.
+
+
+
+<br><br><span class="terms-bold">User Generated Content</span>
+<br><br>User Generated Content ("UGC") refers to the content added by users as opposed to content created by the Site. All content uploaded to Justeece by our users (Buyers and Sellers) is User Generated Content. Justeece does not check user uploaded/created content for appropriateness, violations of copyright, trademarks, other rights or violations and the user uploading/creating such content shall be solely responsible for it and the consequences of using, disclosing, storing, or transmitting it. By uploading to, or creating content on, the Justeece platform, you represent and warrant that you own or have obtained all rights, licenses, consents, permissions, power and/or authority, necessary to use and/or upload such content and that such content or the use thereof in the Site does not and shall not (a) infringe or violate any intellectual property, proprietary or privacy, data protection or publicity rights of any third party; (b) violate any applicable local, state, federal and international laws, regulations and conventions; and/or (c) violate any of your or third party’s policies and/or terms of service. We invite everyone to report violations together with proof of ownership as appropriate. Reported violating content may be removed or disabled.
+
+
+
+
+
+<br><br><span class="terms-bold">Disclaimer of Warranties</span>
+<br><br>YOUR USE OF THE SITE, ITS CONTENT AND ANY SERVICES OR ITEMS OBTAINED THROUGH THE SITE IS AT YOUR OWN RISK. THE SITE, ITS CONTENT AND ANY SERVICES OR ITEMS OBTAINED THROUGH THE SITE ARE PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS, WITHOUT ANY WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED. NEITHER JUSTEECE NOR ANY PERSON ASSOCIATED WITH JUSTEECE MAKES ANY WARRANTY OR REPRESENTATION WITH RESPECT TO THE COMPLETENESS, SECURITY, RELIABILITY, QUALITY, ACCURACY OR AVAILABILITY OF THE SITE.
+<br><br>THE FOREGOING DOES NOT AFFECT ANY WARRANTIES WHICH CANNOT BE EXCLUDED OR LIMITED UNDER APPLICABLE LAW.
+
+<br><br><span class="terms-bold">Limitation on Liability</span>
+<br><br>IN NO EVENT WILL JUSTEECE, ITS AFFILIATES OR THEIR LICENSORS, SERVICE PROVIDERS, EMPLOYEES, AGENTS, OFFICERS OR DIRECTORS BE LIABLE FOR DAMAGES OF ANY KIND, UNDER ANY LEGAL THEORY, ARISING OUT OF OR IN CONNECTION WITH YOUR USE, OR INABILITY TO USE, THE SITE, ANY WEBSITES LINKED TO IT, ANY CONTENT ON THE SITE OR SUCH OTHER WEBSITES OR ANY SERVICES OR ITEMS OBTAINED THROUGH THE SITE OR SUCH OTHER WEBSITES, INCLUDING ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL, CONSEQUENTIAL OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO, PERSONAL INJURY, PAIN AND SUFFERING, EMOTIONAL DISTRESS, LOSS OF REVENUE, LOSS OF PROFITS, LOSS OF BUSINESS OR ANTICIPATED SAVINGS, LOSS OF USE, LOSS OF GOODWILL, LOSS OF DATA, AND WHETHER CAUSED BY TORT (INCLUDING NEGLIGENCE), BREACH OF CONTRACT OR OTHERWISE, EVEN IF FORESEEABLE.
+<br><br>THE FOREGOING DOES NOT AFFECT ANY LIABILITY WHICH CANNOT BE EXCLUDED OR LIMITED UNDER APPLICABLE LAW.
+<br><br>The term “Affiliate” referred to herein, is an entity that, directly or indirectly, controls, or is under the control of, or is under common control with Justeece, where control means having more than fifty percent (50%) voting stock or other ownership interest or the majority of voting rights of such entity.
+
+
+                  </p>
+              </div>
+              <div class="terms-condition form-group checkbox">
+                <input
+                  type="checkbox"
+                  id="fcheckbox"
+                  name="{{form.terms.name}}"
+                  class="form-checkbox"
+                />
+                <label for="fcheckbox"
+                  ><span class="terms-condition-text"
+                    >I agree to the Justeece’s Terms of Service and Privacy Policy</span
+                  ></label
+                >
+              </div>
+              <div class="invalid-tooltip-message text-danger"> {{form.terms.errors.0}} </div>
+              <button type="submit" class="btn btn-primary form-btn">
+                Create my account
+              </button>
+              <div class="terms-condition-text already-loggedin">
+                Already have an account? <a href="{% url 'accounts:login' %}"><span class="login-footer">Log in</span></a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

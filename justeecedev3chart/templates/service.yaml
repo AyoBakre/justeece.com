@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: justeecedev3
+  name: justeece-dev3-svc
+  namespace: justeece
+spec:
+  ports:
+  - name: port8000
+    nodePort: 31802
+    port: 5500
+    protocol: TCP
+    targetPort: 5500
+  selector:
+    app: justeecedev3
+  type: NodePort

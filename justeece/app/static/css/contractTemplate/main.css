@@ -1,0 +1,452 @@
+@font-face {
+    font-family: "Helvetica";
+    src: url("../../fonts/Helvetica.ttf");
+    font-weight: normal;
+    font-style: normal;
+  }
+@font-face {
+    font-family: "Helvetica-Bold";
+    src: url("../../fonts/Helvetica-Bold.ttf");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  .content-wrapper{
+    padding-bottom: 100px;
+  }
+  .header{
+      width: max-content;
+      margin-top: 100px;
+  }
+
+  .header h1{
+    font-family: "Helvetica-Bold", sans-serif;
+    font-style: normal;
+    font-size: 50px;
+    line-height: 130%;
+    text-align: center;
+    color: #484A47;
+  }
+
+  .header-custom{
+    margin-top: 25px;
+    width: 269px;
+    height: 64px;
+    background: #F5F5F5;
+    border-radius: 20px;
+  }
+
+  .header-custom span{
+    margin: 25px;
+    font-family: "Helvetica", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 26px;
+    text-align: center;
+    color: rgba(52, 52, 52, 0.5);    
+  }
+
+  .contract-links{
+      width: 800px;
+      margin-top: 60px;
+      text-align: center;
+  }
+
+    .contract-links ul > li {
+    display: inline-block;
+    zoom:1;
+    *display:inline;
+    padding: 5px;
+    padding-left: 10px;
+    }
+
+    .contract-links ul > li a{
+        font-family: "Helvetica", sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 24px;
+        text-align: center;
+        color: #407BFF;
+    }
+
+    .contract-search-box{
+        margin-top: 60px;
+    }
+
+    .search-box{ 
+        width: 400px;
+        height: 41px;
+        border-radius: 10px;
+    }
+
+      .search-box input#search{
+        background-image: url("/static/images/search-icon.svg");
+        background-repeat: no-repeat;
+        text-indent: 30px;
+        background-position: 10px 10px;
+       }
+       
+      .search-box input#search:focus{
+        background-image:none;
+       }
+
+       .search-box span{
+        font-family: "Helvetica", sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 21px;        
+        color: rgba(72, 74, 71, 0.5);
+        margin-left: 30px;
+       }
+      
+      .contract-cards{
+        margin-top: 70px;
+        overflow-y: scroll;
+      }
+      .contract-cards::-webkit-scrollbar {
+        width:5px;
+        height: 0px;
+    }
+    .contract-cards::-webkit-scrollbar-track {
+
+        -webkit-box-shadow:inset 0 0 6px #F5F5F5; 
+        border-radius:10px;
+    }
+    .contract-cards::-webkit-scrollbar-thumb {
+        -webkit-box-shadow: inset 0 0 6px #407BFF; 
+        width: 2px;
+        border-radius: 10px;
+    }
+      .row{
+        justify-content: center;
+      }
+
+      .card{
+        margin: 20px;
+width: 1000px;
+height: 220px;
+
+background: #FFFFFF;
+box-shadow: 0px 4px 20px rgba(131, 130, 130, 0.2);
+border-radius: 10px;
+transition: all 0.2s;
+      }
+
+      .card:hover {
+        box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
+        transform: scale(1.01);
+      }
+
+      .card-logo{
+        margin-top: 10px;
+      width: 33px;
+height: 77px;
+background: #F2F8FF;
+border-radius: 10px;
+      }
+
+      .card-logo img{
+        margin-top: 55px;
+        margin-left: 8px;
+        width: 17px;
+        height: 17px;
+      }
+
+      .card-head{
+          margin-left: 50px;
+          margin-top: -50px;
+      }
+      .card-head h2{   
+        font-family: "Helvetica", sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;       
+        color: #484A47;
+      }
+
+      .card-bodyy{
+width: 238px;
+height: 105px;
+margin-left: 50px;
+      }
+      .card-bodyy p{
+font-family: "Helvetica", sans-serif;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 21px;
+
+color: rgba(72, 74, 71, 0.5);
+      }
+
+      .card-logo-down{
+        margin-left: 270px;
+      }
+
+
+      .modal-content{
+width: 700px;
+height: 850px;
+background: #FFFFFF;
+box-shadow: 0px 4px 20px rgba(131, 130, 130, 0.2);
+border-radius: 10px;
+
+      }
+
+      .modal-head{
+height: 70px;
+background: #F2F8FF;
+border-radius: 10px 10px 0px 0px;
+text-align: center;
+display: flex;
+  justify-content: center;
+  align-items: center;
+      }
+
+      .modal-head h2{
+font-family: "Helvetica", sans-serif;
+font-style: normal;
+font-weight: 500;
+font-size: 25px;
+line-height: 37px;
+color: #484A47;
+      }
+
+
+      .modal-bodyyy{
+        padding: 25px;
+      }
+
+    .receiver-body h1{
+      font-family: "Helvetica", sans-serif;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 24px;
+      color: #484A47;
+    }
+
+    .name{
+      background: #F5F5F5;
+border: 1px solid #D7D7D7;
+box-sizing: border-box;
+border-radius: 10px;
+    }
+   .input-group-addon {
+      position: absolute;
+      right: 15px;
+      top: 10px;
+    }
+
+    .datee{
+      border: 1px solid #1877F2;
+box-sizing: border-box;
+border-radius: 10px;
+    }
+
+    #calendar{
+     position:absolute;
+     top:0px;
+     left: -10px
+    }
+    .initial{
+      text-align: center;
+    }
+
+    .dateee{
+      border: none;
+      background: transparent;
+      font-family: "Helvetica", sans-serif;
+font-style: normal;
+font-weight: 300;
+font-size: 12px;
+
+color: #1877F2;
+    }
+    
+    .label{
+      font-family: "Helvetica", sans-serif;
+font-style: normal;
+font-weight: bold;
+font-size: 14px;
+line-height: 24px;
+text-align: center;
+color: #484A47;
+    }
+
+    .total-label{
+      margin-left: 60px;
+    }
+
+    .total-input{
+      background: #EDF5FF;
+border: 1px solid #1877F2;
+box-sizing: border-box;
+color: #1877F2;
+    }
+
+    .contract-textarea{
+width: 500px;
+height: 300px;
+
+border: 1px solid #D7D7D7;
+box-sizing: border-box;
+border-radius: 10px;
+margin: 50px;
+padding: 15px;
+    }
+
+    .contract-text-area{
+      
+display: flex;
+overflow-y: scroll;
+height: 250px;
+    }
+
+    .contract-text-area::-webkit-scrollbar {
+      width:5px;
+      height: 0px;
+  }
+  .contract-text-area::-webkit-scrollbar-track {
+
+      -webkit-box-shadow:inset 0 0 6px #F5F5F5; 
+      border-radius:10px;
+  }
+  .contract-text-area::-webkit-scrollbar-thumb {
+      -webkit-box-shadow: inset 0 0 6px #407BFF; 
+width: 2px;
+border-radius: 10px;
+  }
+
+  .contract-text-area p {
+    padding: 15px;
+  }
+
+  .modal-footer{
+    border-top: none;
+    margin-top: -40px;
+    margin-right: 30px;
+  }
+
+  .btn-primary{
+width: 183px;
+height: 44px;
+left: calc(50% - 183px/2 + 228.5px);
+top: calc(50% - 44px/2 + 278px);
+background: #1877F2;
+border-radius: 10px;
+  }
+
+  .grey ::placeholder {
+font-size: 13px;
+color: rgba(52, 52, 52, 0.5) !important;
+  }
+
+  .blue ::placeholder {
+    font-size: 13px;
+    color: #1877F2 !important;
+      }
+
+      .total-blue ::placeholder {
+        font-weight: bold;
+      }
+
+
+
+
+      @media only screen and (max-width:1200px){
+
+        .modal-content{
+          width: 650px;
+          height: 800px;
+        }
+        .card{
+          min-width: 350px;
+        }
+      }
+      @media only screen and (max-width:770px){
+
+        .card{
+          width: 350px;
+        }
+      }
+
+      @media only screen and (max-width:900px){
+
+        .modal-content{
+          width: 550px;
+          height: 830px;
+        }
+        .contract-textarea{
+          width: 400px;
+          height: 300px;
+              }
+      }
+      @media only screen and (max-width:800px){
+          .modal-content{
+            flex: 0 0 auto;
+            width: 600px;
+            height: 800px;
+          }
+          .modal-bodyyy{
+            padding: 25px !important;
+          }
+          .contract-textarea{
+            width: 450px;
+          }
+      }
+
+      @media only screen and (max-width:770px){
+        .modal-content{
+          flex: 0 0 auto;
+          width: 600px;
+          height: 900px;
+        }
+        .modal-bodyyy{
+          padding: 25px !important;
+        }
+        .contract-textarea{
+          width: 450px;
+        }
+        .resp-email{
+          margin-top: 15px;
+          display: flex;
+          justify-content: center;
+        }
+        .resp-email input{
+          width: 260px;
+        }
+        .resp-initial{
+          margin-top: 15px;
+        }
+        .resp-initial input{
+          width: 260px;
+        }
+        
+        .resp-final{
+          margin-top: -10px;
+        }
+        .resp-final input{
+          width: 260px;
+        }
+        .total-label{
+          margin: 0;
+          margin-bottom: 5px;
+        }
+    }
+
+
+    .contract-title{
+      font-weight: 800;
+      margin-left: 75px;
+      text-decoration: underline;
+    }
+
+    .contract-bold{
+      font-weight: 700;
+      
+    }

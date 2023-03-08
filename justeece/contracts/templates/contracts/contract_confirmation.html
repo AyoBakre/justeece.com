@@ -1,0 +1,168 @@
+{% extends 'layout.html' %}{% load static %}
+{% block extrastyles %}
+<link
+rel="stylesheet"
+href="{% static 'lib/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css' %}"
+/>    
+<link rel="stylesheet" href="{% static 'css/landingPage/index.css' %}" />
+<link
+rel="stylesheet"
+href="{% static 'lib/bootstrap-select-1.13.14/dist/css/bootstrap-select.min.css' %}"
+/>
+<link
+rel="stylesheet"
+href="{% static 'css/modal/index.css' %}"
+/>
+<link rel="stylesheet" href="{% static 'css/contract/index.css' %}" />
+<style>
+  
+  .contract-title{
+    font-weight: 800;
+    margin-left: 75px;
+    text-decoration: underline;
+  }
+
+  .contract-bold{
+    font-weight: 700;
+    
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+      <div class="container">
+        <div class="form-wrapper contract-page-parent-wrapper">
+          <div class="contract-page">
+            <div class="contract-page-image-section">
+              <img src="{% static 'images/contract.svg' %}" alt="contract" />
+            </div>
+            <h2 class="form-header">Your contract is ready to be created</h2>
+            <h5 class="form-header-small">View contract details below</h5>
+            <!-- Contract section for last page start -->
+            <!-- <h2 class="form-header">Your contract has been created</h2> -->
+            <!-- <h5 class="form-header-small">
+              <span
+                >An email has been sent to
+                <span>a.kutsan1994@gmail.com</span> to accept</span
+              ><span>
+                this contract. We will notify you if any changes are
+                needed</span
+              >
+            </h5> -->
+            <!-- <div class="buttons-wrapper">
+              <button class="btn btn-outline-primary">Go to main page</button>
+            </div> -->
+            <!-- Contract section for last page end -->
+            <div class="contract-wrapper">
+              <div class="contract-wrapper-section">
+                <div class="contract-wrapper-header">
+                  <div class="contract-wrapper-header-left">
+                    <span class="dispute-wrapper-head">Status of contract</span
+                    ><span class="dispute-wrapper"
+                      ><img
+                        src="{% static 'images/contract-dispute.svg' %}"
+                        alt="dispute"
+                      /><span>{{contract.get_status_display}}</span></span
+                    >
+                  </div>
+                  <div class="contract-wrapper-header-right">
+                    <div class="contract-wrapper-header-right-head">
+                      <span>{{contract.created_with_email}}</span
+                      ><span>
+                        <img
+                          class="card-img-top"
+                          src="{% if contract.created_with.profile_photo %}{{contract.created_with.profile_photo.url}}{% else %}{% static 'images/profile_img.png' %} {% endif %}"
+                          alt=""
+                        />
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="contract-wrapper-content">
+                  <div class="contract-wrapper-content-section">
+                    <div class="contract-wrapper-content-section-wrapper">
+                      <div
+                        class="contract-wrapper-content-section-wrapper-child"
+                      >
+                        <div class="contract-wrapper-content-section-header">
+                          Contract type:
+                        </div>
+                        <div class="contract-wrapper-content-section-content">
+                          {{contract.contract_type}}
+                        </div>
+                      </div>
+                      <div
+                        class="contract-wrapper-content-section-wrapper-child"
+                      >
+                        <div class="contract-wrapper-content-section-header">
+                          Subcategory:
+                        </div>
+                        <div class="contract-wrapper-content-section-content">
+                          {{contract.subcategory}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="contract-wrapper-content-section">
+                    <div class="contract-wrapper-content-section-header">
+                      Contract summary:
+                    </div>
+                    <div class="contract-wrapper-content-section-content">
+                      {{contract.summary | safe}}
+                    </div>
+                  </div>
+                  <div class="contract-wrapper-content-section">
+                    <div class="contract-wrapper-content-section-wrapper">
+                      <div
+                        class="contract-wrapper-content-section-wrapper-child"
+                      >
+                        <div class="contract-wrapper-content-section-header">
+                          Contract start date:
+                        </div>
+                        <div class="contract-wrapper-content-section-content">
+                          {{contract.contract_start_date}}
+                        </div>
+                      </div>
+                      <div
+                        class="contract-wrapper-content-section-wrapper-child"
+                      >
+                        <div class="contract-wrapper-content-section-header">
+                          Contract end date:
+                        </div>
+                        <div class="contract-wrapper-content-section-content">
+                          {{contract.contract_end_date}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="contract-wrapper-content-section">
+                    <div class="contract-wrapper-content-section-wrapper">
+                      <div
+                        class="contract-wrapper-content-section-wrapper-child contract-wrapper-content-section-wrapper-child-last-section"
+                      >
+                        <div class="contract-wrapper-content-section-header">
+                          Amount included
+                        </div>
+                        <div class="contract-wrapper-content-section-content">
+                          ${{contract.amount}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="contract-wrapper-content-section contract-wrapper-footer"
+                  >
+                    <a class="btn btn-outline-primary" href="{% url 'contracts:edit-contract' contract_id=contract.id %}">
+                      Edit contract
+                    </a>
+                    <a class="btn btn-primary" href="{% url 'contracts:submit-contract' contract_id=contract.id %}">Create a contract</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

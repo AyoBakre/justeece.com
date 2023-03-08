@@ -1,0 +1,543 @@
+@font-face {
+  font-family: "Helvetica";
+  src: url("../../fonts/Helvetica.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+.form-wrapper.contract-page-parent-wrapper .form-header-small {
+  font-size: 20px;
+  color: #484a47;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.form-header-small span span {
+  font-weight: 700;
+}
+.form-wrapper.contract-page-parent-wrapper {
+  height: auto;
+  padding: 6rem 0;
+}
+.form-wrapper.contract-page-parent-wrapper .form-header {
+  margin: 25px 0 20px 0;
+}
+.contract-page {
+  width: 100%;
+  max-width: 710px;
+  min-width: 710px;
+}
+.contract-page .contract-page-image-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.contract-page .contract-page-image-section img {
+  max-width: 380px;
+  height: auto;
+}
+.contract-page .contract-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.contract-page .contract-wrapper-header-right span img {
+  max-width: 100px;
+  border-radius: 50%;
+  margin: 0px 10px 0 15px;
+  box-shadow: 0px 3px 20px rgba(131, 130, 130, 0.2);
+  width: 60px;
+  height: 60px;
+}
+.contract-page .contract-wrapper .contract-wrapper-section {
+  max-width: 690px;
+  min-width: 690px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #484a47;
+  box-shadow: 0px 3px 20px rgba(131, 130, 130, 0.2);
+  border-radius: 10px;
+}
+.contract-wrapper-content {
+  padding: 25px;
+  background-color: #fff;
+  font-size: 14px;
+  width: 100%;
+}
+.contract-page
+  .contract-wrapper
+  .contract-wrapper-section
+  .contract-wrapper-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding: 25px;
+  background-color: #f2f8ff;
+}
+.contract-page
+  .contract-wrapper
+  .contract-wrapper-section
+  .contract-wrapper-header
+  .contract-wrapper-header-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.contract-page
+  .contract-wrapper
+  .contract-wrapper-section
+  .contract-wrapper-header
+  .contract-wrapper-header-left
+  .dispute-wrapper-head {
+  font-weight: 700;
+}
+.contract-page
+  .contract-wrapper
+  .contract-wrapper-section
+  .contract-wrapper-header
+  .contract-wrapper-header-left
+  .dispute-wrapper {
+  color: #9b51e0;
+  font-size: 14px;
+}
+.contract-page
+  .contract-wrapper
+  .contract-wrapper-section
+  .contract-wrapper-header
+  .contract-wrapper-header-left
+  .dispute-wrapper
+  span {
+  padding-left: 7px;
+}
+.contract-page
+  .contract-wrapper
+  .contract-wrapper-section
+  .contract-wrapper-content-section {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+}
+.contract-page
+  .contract-wrapper
+  .contract-wrapper-section
+  .contract-wrapper-content-section
+  .contract-wrapper-content-section-wrapper {
+  display: flex;
+  max-width: 340px;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.contract-page
+  .contract-wrapper
+  .contract-wrapper-section
+  .contract-wrapper-content-section
+  .contract-wrapper-content-section-header {
+  font-weight: 700;
+}
+.contract-page
+  .contract-wrapper
+  .contract-wrapper-section
+  .contract-wrapper-content-section
+  .contract-wrapper-content-section-wrapper
+  .contract-wrapper-content-section-wrapper-child-last-section {
+  padding-left: 0 !important;
+}
+.contract-page
+  .contract-wrapper
+  .contract-wrapper-section
+  .contract-wrapper-content-section.contract-wrapper-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.contract-wrapper-footer button {
+  width: 175px;
+}
+@media (max-width: 768px) {
+  .contract-page {
+    width: 100%;
+    max-width: calc(100% - 40px);
+    min-width: auto;
+  }
+  .contract-page .contract-wrapper .contract-wrapper-section {
+    max-width: auto;
+    min-width: auto;
+  }
+}
+@media (max-width: 600px) {
+  .contract-page {
+    width: 100%;
+    max-width: calc(100% - 40px);
+    min-width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .form-wrapper.contract-page-parent-wrapper .form-header-small {
+    width: calc(100% - 120px);
+    line-height: 27px;
+    display: block;
+    text-align: center;
+  }
+  .contract-page
+    .contract-wrapper
+    .contract-wrapper-section
+    .contract-wrapper-content-section
+    .contract-wrapper-content-section-wrapper {
+    flex-direction: column;
+  }
+  .contract-page
+    .contract-wrapper
+    .contract-wrapper-section
+    .contract-wrapper-content-section
+    .contract-wrapper-content-section-wrapper
+    .contract-wrapper-content-section-wrapper-child:last-child {
+    padding-top: 20px;
+  }
+  .contract-page
+    .contract-wrapper
+    .contract-wrapper-section
+    .contract-wrapper-content-section
+    .contract-wrapper-content-section-wrapper
+    .contract-wrapper-content-section-wrapper-child.contract-wrapper-content-section-wrapper-child-last-section {
+    padding-top: 0px;
+  }
+  .contract-page
+    .contract-wrapper
+    .contract-wrapper-section
+    .contract-wrapper-content-section.contract-wrapper-footer {
+    flex-direction: column;
+    width: 100%;
+  }
+  .contract-page
+    .contract-wrapper
+    .contract-wrapper-section
+    .contract-wrapper-content-section.contract-wrapper-footer
+    :last-child {
+    margin-top: 20px;
+  }
+  .contract-page
+    .contract-wrapper
+    .contract-wrapper-section
+    .contract-wrapper-header {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .contract-page
+    .contract-wrapper
+    .contract-wrapper-section
+    .contract-wrapper-header
+    .contract-wrapper-header-right-head {
+    flex-direction: column-reverse;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .contract-page
+    .contract-wrapper
+    .contract-wrapper-section
+    .contract-wrapper-header
+    .contract-wrapper-header-right-head
+    span {
+    font-weight: 700;
+    padding-top: 10px;
+  }
+  .contract-page
+    .contract-wrapper
+    .contract-wrapper-section
+    .contract-wrapper-header
+    .contract-wrapper-header-left {
+    align-items: center;
+  }
+  .contract-page .contract-page-image-section img {
+    max-width: 300px;
+  }
+  .form-wrapper.contract-page-parent-wrapper {
+    padding-top: 3rem;
+  }
+  .contract-wrapper-footer button {
+    width: 100%;
+  }
+  .form-wrapper.contract-page-parent-wrapper .form-header {
+    font-size: 47px;
+  }
+}
+@media (max-width: 468px) {
+  .form-wrapper.contract-page-parent-wrapper .form-header-small {
+    width: calc(100% - 60px);
+    line-height: 27px;
+    display: block;
+    text-align: center;
+  }
+  .form-wrapper.contract-page-parent-wrapper .form-header {
+    font-size: 43px;
+  }
+}
+
+/*About Us*/
+.how-it-started{
+  width: 100%;
+  padding: 65px 0px 0px 0px;
+  position: relative;
+  z-index: 2;
+}
+.how-it-started h2,.our-mission .content-box h2,.testimonial-box h2{
+  width: 100%;
+  margin: 0px 0px 45px 0px;
+  text-align: center;
+  font-style: normal;
+font-weight: 300;
+font-size: 35px;
+line-height: 130%;
+color: rgba(24, 119, 242, 0.7);
+font-family: 'Helvetica', sans-serif;
+}
+.how-it-started h2 span,.our-mission .content-box h2 span,.testimonial-box h2 span{
+  font-weight: 700;
+  color: rgba(24, 119, 242, 1);
+}
+.how-it-started .parabox{
+  width: 100%;
+  max-height: 334px;
+  padding-right: 70px;
+}
+.how-it-started .parabox p,.our-mission .content-box p{
+font-weight: 300;
+font-size: 22px;
+line-height: 32px;
+color: rgba(72, 74, 71, 0.7);
+width: 100%;
+margin: 0px 0px 20px 0px;
+position: relative;
+padding-bottom: 34px;
+}
+.how-it-started .parabox p:after{
+  position: absolute;
+  content: '';
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 100%;
+  background: rgba(24, 119, 242, 0.5);
+}
+.how-it-started .parabox p:last-child{margin-bottom: 0px;padding-bottom: 10px;}
+.how-it-started .parabox p:last-child:after{display: none;}
+
+.scrollbar::-webkit-scrollbar-track
+{
+  background-color: #F5F5F5;
+}
+
+.scrollbar::-webkit-scrollbar
+{
+width: 3px;
+background-color: #F5F5F5;
+}
+
+.scrollbar::-webkit-scrollbar-thumb
+{
+  background-color: #407BFF;
+}
+.scrollbar {
+  overflow-y: auto;
+  outline: none;
+  scrollbar-width: thin;
+}
+
+
+.our-mission{
+  width: 100%;
+  display: flex;
+  margin-bottom: 70px;
+  align-items: center;
+}
+
+.our-mission .img-box{
+  width: 55%;
+}
+.our-mission .content-box{
+  width: 45%;
+  padding-left: 45px;
+}
+.our-mission .content-box h2{
+text-align: left;
+margin-bottom: 33px;
+color: rgba(72, 74, 71, 0.7);
+}
+.our-mission .content-box h2 span{color: rgba(72, 74, 71, 1);}
+.our-mission .content-box p{color: rgba(72, 74, 71, 0.7);margin-bottom: 0px;padding-bottom: 0px;}
+.our-mission .img-box img{max-width: 100%;}
+
+.shadow-effect {
+  padding: 40px 0px 0px 0px;
+  text-align: center;
+}
+#customers-testimonials .shadow-effect p.bold{
+  font-size: 18px;
+  margin-bottom: 0px;
+  font-weight: bold;
+  color: rgba(72, 74, 71, 1);
+}
+#customers-testimonials .shadow-effect p {
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 24px;
+  color: rgba(72, 74, 71, 0.7);
+  margin-bottom: 0px;
+}
+#customers-testimonials .owl-item .item .img-box .pattern-1,#customers-testimonials .owl-item .item .img-box .pattern-2{display: none;}
+#customers-testimonials .owl-item.active.center .item .img-box .pattern-1 {
+  position: absolute;
+  top: -40px;
+  left: 67%;
+  z-index: -1;
+  transform: translateX(-50%);
+  width: 217px;
+  display: block;
+}
+#customers-testimonials .owl-item.active.center .item .img-box .pattern-2 {
+  position: absolute;
+  top: 10px;
+  left: 40%;
+  z-index: -1;
+  transform: translateX(-50%) rotate(180deg);
+  width: 217px;
+  display: block;
+}
+
+#customers-testimonials .item {
+  text-align: center;
+  padding: 0px;
+  margin-bottom:80px;
+  -webkit-transform: scale3d(0.8, 0.8, 1);
+  transform: scale3d(0.8, 0.8, 1);
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+#customers-testimonials .owl-item.active.center .item {
+  opacity: 1;
+  -webkit-transform: scale3d(1.0, 1.0, 1);
+  transform: scale3d(1.0, 1.0, 1);
+}
+#customers-testimonials .item img {
+  transform-style: preserve-3d;
+  max-width: 151px;
+  margin: 0 auto 32px;
+  border-radius: 100%;
+}
+#customers-testimonials .owl-item.active.center .item .img-box{width: 100%;position: relative;}
+
+#customers-testimonials .owl-item.active.center .item img{
+  max-width: 251px;
+}
+
+
+#customers-testimonials{display: block !important;padding: 0px 70px;position: relative;}
+#customers-testimonials .owl-nav {
+  position: absolute;
+  left: 0px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  top: 25%;
+  transform: translateY(-50%);
+}
+#customers-testimonials .owl-nav button span {
+  font-size: 32px;
+  line-height: normal;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: -3px;
+}
+#customers-testimonials .owl-nav button{
+  color: #fff;
+  width: 41px;
+  height: 41px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  background-color: #1877F2;
+}
+#customers-testimonials .owl-nav button span{font-size: 32px;}
+#customers-testimonials .owl-nav button:focus{outline: none;}
+
+#customers-testimonials .owl-stage-outer{
+  z-index: 2;
+}
+
+@media (max-width:800px){
+  .how-it-started{
+    padding: 45px 15px 0px;
+  }
+  .our-mission{padding-left: 15px;padding-right: 15px;}
+  .content-wrapper .container.aboutus{flex-direction: column;}
+  #customers-testimonials .owl-item.active.center .item img{
+    max-width: 191px;
+  }
+  #customers-testimonials .owl-nav{    
+    max-width: calc(100% - 30px);
+    margin: auto;
+    left: 15px;
+  }
+  .shadow-effect{padding-top: 28px;}
+  #customers-testimonials .owl-item.active.center .item .img-box .pattern-1 {
+    top: -28px;
+    left: 65%;
+    width: 124px;
+}
+#customers-testimonials .owl-item.active.center .item .img-box .pattern-2 {
+  width: 181px;
+}
+ }
+@media (max-width:767px){
+  .our-mission{margin-bottom: 45px;flex-direction: column;}
+  .our-mission .img-box{width: 100%;}
+  .our-mission .content-box {width: 100%;padding-left: 0px;padding-top: 45px;text-align: center;}
+  .our-mission .content-box h2{text-align: center;}
+  #customers-testimonials .shadow-effect p.bold{
+    font-size: 16px;
+  }
+  #customers-testimonials .owl-nav button{width: 35px;height: 35px;}
+  #customers-testimonials .shadow-effect p{font-size: 14px;}
+  #customers-testimonials .owl-item.active.center .item img{margin-bottom: 24px;}
+  .how-it-started h2,.our-mission .content-box h2,.testimonial-box h2{
+    font-size: 25px;
+    line-height: 130%;
+    margin-bottom: 20px;
+  }
+  .how-it-started .parabox{
+    width: 100%;
+    max-height: 262px;
+    padding-right: 18px;
+    text-align: center;
+  }
+  .how-it-started .parabox p,.our-mission .content-box p{
+  font-size: 14px;
+  line-height: 20px;
+  margin: 0px 0px 17px 0px;
+  padding-bottom: 26px;
+  }
+  .our-mission .content-box p{margin-bottom: 0px;padding-bottom: 0px;}
+  .how-it-started .parabox p:after{
+    width: 9px;
+    height: 9px;
+  }
+}
+.aboutus-img {
+  padding-bottom: 20px;
+}
+/*About Us*/

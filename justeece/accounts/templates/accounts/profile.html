@@ -1,0 +1,409 @@
+    {% extends 'layout.html' %}{% load static %}
+    {% load static %}
+    {% block extrastyles %}
+        <link rel="stylesheet" href="{% static 'css/contractPage/index.css' %}" />
+        <link
+        rel="stylesheet"
+        href="{% static 'lib/bootstrap-select-1.13.14/dist/css/bootstrap-select.min.css' %}"
+        />
+        <link
+        rel="stylesheet"
+        href="{% static 'lib/bootstrap-datepicker-master/dist/css/bootstrap-datepicker.min.css' %}"
+        />
+        <link rel="stylesheet" href="{% static 'css/profilePage/index.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/personal-detail/index.css' %}" />
+        <style>
+          .output {
+              list-style: none;
+              width: 100%;
+              min-height: 0px;
+              border-top: 0 !important;
+              color: #767676;
+              font-size: .75em;
+              transition: min-height 0.2s;
+              position: absolute;
+              z-index: 5;
+            }
+
+            .output, #search-bar {
+              background: #fff;
+              border: 1px solid #767676;
+              border-radius: 10px;
+            }
+
+            .output:hover .focus {
+              background: #fff;
+              color: #767676;
+            }
+
+            .output:hover .focus:hover {
+              background: #ddd;
+              color: #333;
+            }
+
+            .prediction-item {
+              padding: 0.5em 0.75em;
+              transition: color 0.2s, background 0.2s;
+          }
+
+          .edit-personal-details .form-group .send-emailbox button {
+            margin-left: -10px;
+            border-radius: 10px;
+        }
+        </style>
+    {% endblock %}
+    
+     
+    {% block content %}
+    <div class="content-wrapper">
+      <div class="container">
+        <div class="form-wrapper profile-page-parent-wrapper">
+          <div class="profile-page">
+            <div class="profile-description">
+              <div class="profile-image-wrapper">
+                <img
+                  class="profile-image"
+                  src="{{user.profile_photo.url}}"
+                  alt=""
+                />
+              </div>
+              <div class="profile-image-description">
+                <div class="profile-name">{{user.first_name}} {{user.last_name}}</div>
+                <div class="profile-location">{{user.country}}, {{user.city}}</div>
+                <div class="profile-completion">
+                  <span class="success">100%</span><span>Success</span>
+                </div>
+                <div class="profile-completion-section">
+                  <div class="profile-completion-section-progess">
+                    <span
+                      ><img
+                        src="{% static 'images/inProgress.svg' %}"
+                        alt="progress" /></span
+                    ><span class="inner-text">In progess ( {% if contracts_inprogress %}{{contracts_inprogress.count}} {% else %} 0 {% endif %} )</span>
+                  </div>
+                  <div class="profile-completion-section-complete">
+                    <span
+                      ><img
+                        src="{% static 'images/completed.svg' %}"
+                        alt="complete" /></span
+                    ><span class="inner-text">Completed ( {% if contracts_completed %}{{contracts_completed.count}} {% else %} 0 {% endif %} )</span>
+                  </div>
+                </div>
+                <div class="profile-dispute-section">
+                  <div
+                    class="profile-dispute-section-complete align-profile-section"
+                  >
+                    <span
+                      ><img
+                        src="{% static 'images/cancelled.svg' %}"
+                        alt="cancelled" /></span
+                    ><span class="inner-text">Cancelled ( {% if contracts_canceled %}{{contracts_canceled.count}} {% else %} 0 {% endif %} )</span>
+                  </div>
+                  <div
+                    class="profile-dispute-section-pending align-profile-section" style="align-items: left;"
+                  >
+                    <span
+                      ><img
+                        src="{% static 'images/pending.svg' %}"
+                        alt="pending" /></span
+                    ><span class="inner-text">Pending ( {% if contracts_pending %}{{contracts_pending.count}} {% else %} 0 {% endif %} )</span>
+                  </div>
+                </div>
+                <div class="mt-3">
+                  {% if reference %}
+                      <img src="{% static 'images/thumbsUp.png' %}" alt="" width="25px">
+                      {% if reference.count is 1 %}
+                        Referred By {{reference.count}} Person 
+                      {% else %}
+                        Referred By {{reference.count}} People 
+                      {% endif %} 
+                      <br>
+                      {% for i in reference  %}
+                          <img src="{{ i.profile_photo.url }}" alt="" width="40px;" height="40px" style="border-radius: 50%;" class="ml-3 mt-3">
+                      {% endfor %}
+                      <br>
+                      <br>
+
+                    {% else %}
+                      You currently have no references
+                      <br>
+                      <br> 
+                  {% endif %}
+                  
+                  <a href="#move">Click here to get References</a>
+                </div>
+                {% if not user == request.user %}
+                <div class="profile-creation-button">
+                  <a class="btn btn-primary" href="{% url 'contracts:create-contract' %}?search={{user.email}}">Create contract</a>
+                </div>
+                {% endif %}
+              </div>
+            </div>
+            <div class="profile-detail-description">
+              <div class="profile-detail-myself profile-detail-wrapper">
+                <div class="profile-detail-left-section">About Myself</div>
+                <div class="profile-detail-right-section">
+                  {{user.about_me}}
+                </div>
+              </div>
+              <div class="profile-detail-name profile-detail-wrapper">
+                <div class="profile-detail-left-section">Full Name</div>
+                <div class="profile-detail-right-section">{{user.first_name}} {{user.last_name}}</div>
+              </div>
+              <div class="profile-detail-email profile-detail-wrapper">
+                <div class="profile-detail-left-section">Email</div>
+                <div class="profile-detail-right-section">
+                  {{user.email}}
+                </div>
+              </div>
+              <div class="profile-detail-phone-number profile-detail-wrapper">
+                <div class="profile-detail-left-section">Phone number</div>
+                <div class="profile-detail-right-section">
+                  {{user.phone_number}}
+                </div>
+              </div>
+              <div class="profile-detail-language profile-detail-wrapper">
+                <div class="profile-detail-left-section">Languages</div>
+                <div class="profile-detail-right-section">
+                  {{user.language}}
+                </div>
+              </div>
+              <div class="profile-detail-total-contacts profile-detail-wrapper">
+                <div class="profile-detail-left-section">Total Contracts</div>
+                <div class="profile-detail-right-section">{{user.created_by_user.count}}</div>
+              </div>
+            </div>
+            <div class="edit-personal-details" id = 'move'>
+              <div class="profile-creation-button">
+                {% if request.user == user %}
+                  <a class="btn btn-outline-primary form-btn" href="{% url 'accounts:personal-details' %}">
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <g clip-path="url(#clip0)">
+                          <path d="M0.5 10.7914V13.5001H3.20871L11.2012 5.50754L8.49248 2.79883L0.5 10.7914Z" fill="#1877F2"/>
+                          <path d="M13.2884 2.39789L11.6018 0.711279C11.3201 0.429574 10.8614 0.429574 10.5797 0.711279L9.25781 2.03313L11.9665 4.74184L13.2884 3.41999C13.5701 3.13828 13.5701 2.67959 13.2884 2.39789Z" fill="#1877F2"/>
+                          </g>
+                          <defs>
+                          <clipPath id="clip0">
+                          <rect width="13" height="13" fill="white" transform="translate(0.5 0.5)"/>
+                          </clipPath>
+                          </defs>
+                          </svg>
+                      Edit personal details</a>
+                  {% endif %}
+                    <div style = 'margin-bottom: 100px' id="ref-dv">
+                      <h5 class="form-header-small">References</h5>
+                      <form action="{% url 'accounts:send-reference-email' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-row">
+                          <div class="col-md-6 mb-3">
+                            <label for="validationServer01">Reference Email</label>
+                            <input type="email" class="form-control" id="" value="" name="email" required>
+                            
+                          </div>
+                          <div class="col-md-6 mb-3">
+                            <label for="validationServer02">Reference Name</label>
+                            <input type="text" class="form-control" id="" value="" name='name' required>
+                            
+                          </div>
+                        </div>
+                        <div id ='plus' onclick="addform()"><em class="fa fa-plus" style="font-size:36px" ></em></div>
+                        <button id='ref-btn' class="btn btn-primary float-right" type="submit">Submit form</button>
+                      </form>
+                      
+                        <form id="form1" style="display: none;" action="{% url 'accounts:send-reference-email' %}" method="post">
+                          {% csrf_token %}
+                          <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                              <input placeholder="enter reference email"  type="email" class="form-control" id="" value="" name="email" required>
+                              
+                            </div>
+                            <div class="col-md-6 mb-3">
+                              <input placeholder="enter reference name" type="text" class="form-control" id="" value="" name='name' required>
+                              
+                            </div>
+                          </div>
+                        </form>
+                        <div style="display: none;" id ='plus1' onclick="addform2()"><em class="fa fa-plus" style="font-size:36px" ></em></div>
+                        <br>
+                        <form  id="form2" style="display:none" action="{% url 'accounts:send-reference-email' %}" method="post">
+                          {% csrf_token %}
+                          <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                              <input type="email" placeholder="enter reference email" class="form-control" id="" value="" name="email" required>
+                              
+                            </div>
+                            <div class="col-md-6 mb-3">
+                              <input placeholder="enter reference name" type="text" class="form-control" id="" value="" name='name' required>
+                              
+                            </div>
+                          </div>
+                        </form>
+                    </div>
+                      <h5 class="form-header-small">Cover letter</h5>
+                      <p>
+                          {% if cover_letter %} {{cover_letter}} {% else %} No cover letter {% endif %}
+                      </p>
+                      {% if request.user == user %}
+
+                        {% if cover_letter %}
+                          <a class="btn btn-outline-primary form-btn no-border" href="{% url 'accounts:create-cover-letter' %}">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0)">
+                              <path d="M0.5 10.7914V13.5001H3.20871L11.2012 5.50754L8.49248 2.79883L0.5 10.7914Z" fill="#1877F2"/>
+                              <path d="M13.2884 2.39789L11.6018 0.711279C11.3201 0.429574 10.8614 0.429574 10.5797 0.711279L9.25781 2.03313L11.9665 4.74184L13.2884 3.41999C13.5701 3.13828 13.5701 2.67959 13.2884 2.39789Z" fill="#1877F2"/>
+                              </g>
+                              <defs>
+                              <clipPath id="clip0">
+                              <rect width="13" height="13" fill="white" transform="translate(0.5 0.5)"/>
+                              </clipPath>
+                              </defs>
+                              </svg>
+                                Edit cover letter</a>
+                        {% else %}
+                          <a class="btn btn-outline-primary form-btn no-border" href="{% url 'accounts:create-cover-letter' %}">
+                                Create cover letter</a>
+                        {% endif %}
+                      
+                      <form class="" action="{% url 'accounts:send-cover-letter' %}" method="post">
+                        {% csrf_token %}
+                              <div class="form-group">
+                                  <label>Send cover letter to prospective employer</label>
+                                  <div class="send-emailbox">
+                                      <input type="email" name="email" placeholder="Enter email address" class="form-control" autocomplete="off" id="search-bar">
+                                      <button type="submit" class="btn btn-primary">Send</button>
+                                  </div>
+                                  <ul class="output selectpicker" style="display: none;" id="searchResult" >
+                                  </ul>
+                              </div>
+                      </form>
+                      {% endif %}
+                </div>
+          </div>
+            <div class="profile-details-history">
+              <h5 class="form-header-small">Deals History</h5>
+              {% for cont_his in contracts_history %}
+              <div class="details-history-wrapper">
+                <div class="details-history-wrapper-section">
+                  <div class="details-history-wrapper-section-header">
+                    {{cont_his.contract.contract_name}}
+                  </div>
+                  <div class="details-history-wrapper-section-content">
+                    
+                    <div class="details-history-wrapper-section-content-header">
+                      {% if cont_his.status == 3 %}
+                      
+                      <div class="stars-wrapper">
+                        <em class="fas fa-star active-color"></em>
+                        <em class="fas fa-star active-color"></em>
+                        <em class="fas fa-star"></em>
+                        <em class="fas fa-star"></em>
+                        <em class="fas fa-star"></em>
+=                      </div>
+                      
+                      {% endif %}
+                      <div class="date-wrapper">{{cont_his.contract.contract_start_date}} - {{cont_his.contract.contract_end_date}}</div>
+                    </div>
+                    
+                    <div class="details-history-wrapper-section-content-main">
+                      “{{cont_his.feedback}}”
+                    </div>
+                    <div class="details-history-wrapper-section-content-amount">
+                      ${{cont_his.contract.amount}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+              <div class="buttons-wrapper">
+                <button
+                  type="submit"
+                  class="btn btn-outline-primary profile-btn back_btn"
+                >
+                  Back to the main page
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+    {% endblock %}
+    {% block extrascript %}
+    <script src="{% static 'lib/bootstrap-datepicker-master/dist/js/bootstrap-datepicker.min.js' %}"></script>
+    <script>
+            $('#search-bar').focus(function(){
+        console.log("focus")
+        if ( $('.prediction-item').length > 0 ) {
+          $('.output').slideDown();
+        }
+      })
+
+        $("#search-bar").keyup(function(){
+          console.log("keyup")
+      var search = $(this).val();
+      if(search != ""){
+
+          $.ajax({
+              url: '/accounts/user_list/'+search,
+              type: 'get',
+              data: {search:search},
+              dataType: 'json',
+              success:function(response){
+                  var len = response.length;
+                  $("#searchResult").empty();
+                  for( var i = 0; i<len; i++){
+                      var id = response[i]['id'];
+                      var email = response[i]['email'];
+                      
+                      $("#searchResult").append('<li class="prediction-item"><span class="prediction-text" value='+id+'>' + email + '</span></li>');
+                     // $("#searchResult").append("<li value='"+id+"'>"+email+"</li>");
+                  }
+                  if (len===0){
+                      $("#searchResult").append('<li class="prediction-item noclick"><span class="prediction-text" value="No result found">No result found</span></li>');
+
+                  }
+                  
+                  // binding click event to li
+                  $("#searchResult li").bind("click",function(){
+                    $('#search-bar').val(this.childNodes[0].innerHTML);
+                      $('.output').slideUp();
+                  });
+                  $('.output').slideDown();
+
+              }
+          });
+      }
+
+  });
+
+  $('.back_btn').on('click',function(){
+        window.location.href = '/accounts/dashboard'
+      })  
+
+    </script>
+    <script>
+      
+      function addform() {
+        div = document.getElementById('form1');
+        div.style.display = "block";
+        plus = document.getElementById('plus');
+        plus.style.marginTop = '100px';
+        plus.style.display = 'none'
+        plus = document.getElementById('plus1');
+        plus.style.display = 'block'
+        div = document.getElementById('ref-btn');
+        div.style.marginTop = '50px'
+      }
+
+
+      function addform2() {
+        div = document.getElementById('form2');
+        div.style.display = "block";
+        plus = document.getElementById('plus1');
+        plus.style.display = 'none';
+        div = document.getElementById('ref-btn');
+        div.style.marginTop = '150px';
+      }
+
+    </script>
+    {% endblock %}

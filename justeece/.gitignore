@@ -1,0 +1,8 @@
+public/
+public/**
+*.pyc
+pycache/**
+**pycache**
+.env
+venv
+

@@ -1,0 +1,133 @@
+@font-face {
+    font-family: "Helvetica";
+    src: url("../../fonts/Helvetica.ttf");
+    font-weight: normal;
+    font-style: normal;
+  }
+@font-face {
+    font-family: "Helvetica-Bold", sans-serif;
+    src: url("../../fonts/Helvetica-Bold.ttf");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  .header{
+      margin-top: -75px;
+  }
+
+  .send-header{
+margin-top: 100px;
+font-family: 'Helvetica', sans-serif;
+font-style: normal;
+font-weight: 300;
+font-size: 32px;
+line-height: 130%;
+text-align: center;
+color: #484A47;
+  }
+
+  .send-header span{
+    font-family: "Helvetica-Bold", sans-serif;
+  }
+  
+  .contract-page-link-row{ 
+    margin-top: 30px;
+    margin-bottom: 100px;
+    display: flex;
+    justify-content: center;
+  }
+  .contract-page-link{
+width: 450px;
+height: 133px;
+background: #1877F2;
+border-radius: 20px;
+display: flex;
+align-items: center;
+  }
+
+  .contract-page-link-h3{
+width: 153px;
+height: 90px;
+font-family: "Helvetica", sans-serif;
+font-style: normal;
+font-weight: bold;
+font-size: 36px;
+line-height: 120%;
+color: #FFFFFF;
+margin-top: 50px;
+  }
+  .contract-page-link img{
+   margin-left: 200px;
+   margin-top: -150px;
+  }
+
+  /* If the screen size is 600px or less, set the font-size of <div> to 30px */
+@media only screen and (max-width: 630px) {
+ .header{
+    margin-top: 5px;
+ }
+ #header{
+width: 239px;
+height: 58px;
+font-family: "Helvetica", sans-serif;
+font-style: normal;
+font-weight: 300;
+font-size: 20px;
+line-height: 29px;
+text-align: center;
+color: #484A47;
+ }
+ #header-hs{
+   margin-top: 5px;
+  width: 345px;
+  height: 94px;
+  font-family: "Helvetica", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 130%;
+  text-align: center;
+  color: #484A47;
+ }
+
+ .landing-page{
+  width: 345px;
+  height: 47px;
+ }
+
+input[type="text"]::placeholder {  
+  font-size: 14px; 
+} 
+
+.send-header{
+  
+width: 304px;
+height: 70px;
+}
+.contract-page-link{
+  margin-top: 40px;
+  width: 300px;
+  height: 133px;
+    }
+  .contract-page-link-row{
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width:1000px){
+      .contract-page-link-h3{
+    
+    font-size: 28px;
+      }
+      .contract-page-link img{
+       margin-left: 135px;
+       margin-top: -150px;
+      }
+}
+
+@media only screen and (max-width: 770px){
+  .contract-page-link{
+    width: 300px;
+    margin: 20px;
+  }
+}

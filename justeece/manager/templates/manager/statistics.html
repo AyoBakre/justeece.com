@@ -1,0 +1,162 @@
+{% extends 'layout.html' %}{% load static %}
+
+{% block extrastyles %}
+    <style>
+        #user-count{
+            margin-bottom: 50px;
+        }
+        h1{
+            padding: 12px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 800;
+        }
+        #user-stats {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+          }
+          
+          #user-stats td, #user-stats th {
+            border: 1px solid #ddd;
+            padding: 8px;
+          }
+          
+          #user-stats tr:nth-child(even){background-color: #f2f2f2;}
+          
+          #user-stats tr:hover {background-color: #ddd;}
+          
+          #user-stats th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: center;
+            background-color: #1877f2;
+            color: white;
+            font-size: 20px;
+          }
+
+          #user-stats td{
+              font-size: 18px;
+              font-weight: 500;
+              text-align: center;
+          }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container">
+            <div class="form-wrapper landing-page-parent-wrapper">
+                
+                <div id="user-count">
+                    <h1>User Statistics</h1>
+
+                    <table id="user-stats">
+                        <tr>
+                            <th>Fully Registered (with References)</th>
+                            <th>Fully Registered</th>
+                            <th>Partly Registered</th>
+                        </tr>
+                        <tr>
+                            <td>{{fully_registerted_with_references}}</td>
+                            <td>{{fully_registered}}</td>
+                            <td>{{partly_registered}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <hr>
+                <div id="user-count">
+                    <h1>Contracts Activities Summary</h1>
+
+                    <table id="user-stats">
+                        <tr>
+                            <th>Contracts Activities Summary</th>
+                            <th>Status</th>
+                        </tr>
+                        {% if contract_activities%}
+                        {% for contract_activity in contract_activities %}
+                        <tr>
+                            <td>{{contract_activity.created_by | upper}} sent a {{contract_activity.contract_type}} contract to {{contract_activity.created_with_email}}</td>
+                            <td>{{contract_activity.get_status_display}}</td>
+                        </tr>
+                    {% endfor %}
+                    {%else%}
+                        {%endif %}
+                    </table>
+                </div>
+
+                <hr>
+                <div id="user-count">
+                    <h1>References Request Summary</h1>
+
+                    <table id="user-stats">
+                        {% for reference_request in references_requested %}
+                            <tr>
+                                <td>{{reference_request.user | upper}} requested reference from {{reference_request.email | upper}}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                <hr>
+                <div id="user-count">
+                    <h1>References Added Summary</h1>
+
+                    <table id="user-stats">
+                        {% for reference in references %}
+                            <tr>
+                                <td>{{reference.email | upper}} added reference for {{reference.reference_for | upper}}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+
+                <hr>
+                <div id="user-count">
+                    <h1>Search History</h1>
+
+                    <table id="user-stats">
+                        {% for search in all_searches %}
+                            {% if search.user %}
+                                <tr>
+                                    <td>{{search.user}} searched for {{search.search}}</td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td>Anonymous user searched for {{search.search}}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </table>
+                </div>
+
+                <hr>
+                <div id="user-count">
+                    <h1>User Activities History</h1>
+
+                    <table id="user-stats">
+                        {% for user in users %}
+                            {% if user.profile_added %}
+                                <tr>
+                                    <td>{{user | upper}} recently completed their profile details </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </table>
+                </div>
+
+                <hr>
+                <div id="user-count">
+                    <h1>Profile Views History</h1>
+
+                    <table id="user-stats">
+                        {% for profile_view in profile_views %}
+                            <tr>
+                                <td>{{profile_view.user_viewer | upper}} viewed {{profile_view.user_viewed | upper}}'s profile </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

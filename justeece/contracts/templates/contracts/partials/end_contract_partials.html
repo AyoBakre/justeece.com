@@ -1,0 +1,44 @@
+<div class="modal-body">
+<div class="form-group">
+    <label for="end">Please select the reason for ending contract</label>
+    <select id="end" name="end" class="selectpicker"> 
+        <option value="" selected disabled>Choose the reason</option> 
+        {% for value, text in form.end_contract_reason.field.choices %}
+        <option value="{{value}}" {% if form.end_contract_reason.value == value %} selected {% endif %} >{{text}}</option>
+        {% endfor %}
+    </select>
+    </div>
+
+    <div class="form-group">
+    <label for="subject">Feedback</label>
+    <textarea
+        id="subject"
+        name="{{form.feedback.name}}"
+        placeholder=""
+        class="form-field form-control testimonial_feedback"
+    ></textarea>
+    </div>
+    <p class="error_text d-none"> Please fill the feedback</p>
+    <div class="form-group">
+        <label>
+        Please estimate the client
+        </label>
+        <div id="full-stars-example">
+        <div class="rating-group">
+            <label aria-label="1 star" class="rating__label" for="rating-1"><em class="rating__icon rating__icon--star fa fa-star"></em></label>
+            <input class="rating__input" name="rating" id="rating-1" value="1" type="radio">
+            <label aria-label="2 stars" class="rating__label" for="rating-2"><em class="rating__icon rating__icon--star fa fa-star"></em></label>
+            <input class="rating__input" name="rating" id="rating-2" value="2" type="radio">
+            <label aria-label="3 stars" class="rating__label" for="rating-3"><em class="rating__icon rating__icon--star fa fa-star"></em></label>
+            <input class="rating__input" name="rating" id="rating-3" value="3" type="radio" checked>
+            <label aria-label="4 stars" class="rating__label" for="rating-4"><em class="rating__icon rating__icon--star fa fa-star"></em></label>
+            <input class="rating__input" name="rating" id="rating-4" value="4" type="radio">
+            <label aria-label="5 stars" class="rating__label" for="rating-5"><em class="rating__icon rating__icon--star fa fa-star"></em></label>
+            <input class="rating__input" name="rating" id="rating-5" value="5" type="radio">
+        </div>
+
+    </div>
+</div>
+<input type="hidden" name="{{form.status.name}}" value="3"> 
+<input type="hidden" name="{{form.contract.name}}" value="{{contract.id}}">           
+</div>

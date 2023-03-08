@@ -1,0 +1,71 @@
+{% extends 'layout.html' %}{% load static %}
+{% block extrastyles %}
+<link rel="stylesheet" href="{% static 'lib/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css' %}"/>    
+<link rel="stylesheet" href="{% static 'css/landingPage/index.css' %}" />
+<link rel="stylesheet" href="{% static 'lib/bootstrap-select-1.13.14/dist/css/bootstrap-select.min.css' %}"/>
+<link rel="stylesheet" href="{% static 'css/modal/index.css' %}" />
+<link rel="stylesheet" href="{% static 'css/my-contract/index.css' %}" />
+{% endblock %}
+{% block content %}
+    <div class="content-wrapper">
+      <div class="container my-contract-wrapper">
+        <div class="form-wrapper contact-page-parent-wrapper personal-detail">
+          <h2 class="form-header">Your contracts</h2>
+          <h5 class="form-header-small">
+            View all the contracts you have and had
+          </h5>
+          <div class="white-box">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link active" id="provider-tab" data-toggle="tab" href="#provider" role="tab" aria-controls="provider" aria-selected="true">
+                     <span class="tab-name">As a provider <span class="circle"></span></span> 
+                    </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link" id="client-tab" data-toggle="tab" href="#client" role="tab" aria-controls="client" aria-selected="false">As a client</a>
+                </li>
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="provider" role="tabpanel" aria-labelledby="provider-tab">
+
+                {% include 'contracts/partials/my_contracts_partials.html' with contracts=contracts_provider contract_type=provider %}
+                </div>
+                <div class="tab-pane fade" id="client" role="tabpanel" aria-labelledby="client-tab">
+                    {% include 'contracts/partials/my_contracts_partials.html' with contracts=contracts_client contract_type=client %}
+                </div>
+              </div>
+          </div>
+          <!-- <div class="btn-group">
+              <button type="button" class="show-more-btn">
+                Show more
+              </button>
+          </div> -->
+        </div>
+      </div>
+    </div>
+
+{% endblock %}
+{% block extrascript %}
+<script src="{% static 'lib/OwlCarousel2-2.3.4/dist/owl.carousel.js' %}"></script>
+<script src="{% static 'js/landingPage.js' %}"></script>
+<script>
+    $("#contract-search").on("keyup", function() {
+        var value = $(this).val();
+
+        $("table tr").each(function(index) {
+            if (index != 0) {
+
+                $row = $(this);
+
+                var id = $row.find("td:first").find('p:first').text().trim();
+                if (id.indexOf(value) != 0) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

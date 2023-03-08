@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}{% block content %} {% load i18n %} {% block pageclass %} {% endblock %} {% load staticfiles static %}
+<title>Verify Your Email</title>
+<div class="content-wrapper">
+<div class="content">
+    <div class="form-wrapper">
+        <h2 class="text-center">Verify Your Email</h2>
+        <p class="w-auto mx-auto text-center">We've sent a verification link to your email address {{email}}. Please click on the link to verify your account {% comment %} :<br><strong>amit******@gmail.com</strong> {% endcomment %}
+        </p>
+        <form class="mt-4 sign-up">
+            <div class="form-group my-4 pb-2 pt-4 text-center">
+                <a href="{% url 'accounts:resendverification' email %}" class="underline">Didn't receive a verification link?</a>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+
+{% endblock %}

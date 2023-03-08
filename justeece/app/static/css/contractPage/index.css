@@ -1,0 +1,139 @@
+@font-face {
+  font-family: "Helvetica";
+  src: url("../../fonts/Helvetica.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+.form-wrapper.contact-page-parent-wrapper {
+  height: auto;
+  padding-top: 8rem;
+}
+.contact-page-parent-wrapper .form-header-small {
+  font-size: 20px;
+  color: #484a47;
+  display: flex;
+  justify-content: center;
+  max-width: 400px;
+  padding-bottom: 25px;
+  flex-direction: column;
+}
+.contact-page-parent-wrapper .form-header-small span {
+  font-weight: 700;
+}
+.contact-page {
+  width: 100%;
+  max-width: 430px;
+  min-width: 430px;
+}
+.contact-page .form-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.contact-page .form-group label {
+  font-weight: 700;
+  font-size: 16px;
+  font-family: "Helvetica", sans-serif;
+  color: #484a47;
+  padding-left: 15px;
+}
+.contact-page .form-group textarea {
+  min-height: 111px;
+}
+.contact-page
+  .form-group
+  .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+  width: 100%;
+}
+.contact-page .form-group .bootstrap-select .btn {
+  background-color: transparent;
+  border-radius: 10px;
+  border: 1px solid #d7d7d7;
+  color: #484a47;
+}
+.contact-page .form-group .bootstrap-select .btn:focus {
+  border: 1px solid #1877f2;
+  outline: 0 !important;
+  box-shadow: none;
+}
+.contact-page .form-group .bootstrap-select .dropdown-menu li {
+  border-bottom: 1px solid #d7d7d7;
+}
+.contact-page .form-group .bootstrap-select .dropdown-menu li a {
+  color: #484a47;
+}
+.contact-page
+  .form-group
+  .bootstrap-select
+  .dropdown-menu
+  li
+  a.selected.active {
+  color: #fff;
+}
+.contact-page
+  .form-group
+  .bootstrap-select
+  .dropdown-menu
+  li
+  a.selected.active {
+  color: #fff;
+  background-color: #1877f2;
+}
+.contact-page .form-group .bootstrap-select .dropdown-menu li a:hover {
+  color: #fff;
+  background-color: #1877f2;
+}
+.contact-page .form-group .bootstrap-select .dropdown-menu.show {
+  border: 1px solid #d7d7d7;
+  border-radius: 10px;
+  padding: 0;
+  margin: 0;
+}
+.contact-page .form-group .date.custom-datepicker .input-group-addon {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+}
+.datepicker td,
+.datepicker th {
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 0.85rem;
+}
+
+.datepicker {
+  margin-bottom: 3rem;
+}
+.datepicker-dropdown {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+.contact-checkbox {
+  font-family: "Helvetica", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 21px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+}
+.contact-page .contact-checkbox label {
+  padding-left: 35px;
+  line-height: 20px;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+}
+
+@media (max-width: 600px) {
+  .contact-page {
+    max-width: unset;
+    min-width: calc(100% - 40px);
+    padding: 0 20px;
+  }
+  .contact-page .contact-checkbox.checkbox label:before {
+    top: 0%;
+  }
+}

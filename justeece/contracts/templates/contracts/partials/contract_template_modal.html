@@ -1,0 +1,100 @@
+ {% load static %}
+ <!-- Modal -->
+ <div class="modal fade" id="modal{{contract_template.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-head">
+          
+          <h2>{{contract_template.title}}</h2>
+        </div>
+        <div class="modal-bodyyy container">
+          <div class="receiver-body">
+              <h1>Receiver Information: </h1>
+              <form action="{% url 'contracts:contract-template' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" value="{{contract_template.title}}" name="contract_name">
+                <div class="row mt-2">
+                    <div class="col grey">
+                      <input type="text" class="form-control name first_name" 
+                      placeholder="First Name" id="first_name"
+                      aria-label="First name" name="{{form.receiving_party_first_name}}">
+                    </div>
+                    <div class="col grey">
+                      <input type="text" class="form-control name last_name" id="last_name" 
+                      placeholder="Last Name" 
+                      aria-label="Last name" name= "{{form.receiving_party_first_name}}">
+                    </div>
+                    <div class="col-md-5 grey resp-email">
+                        <input type="email" class="form-control name email search-bar" placeholder="Email" 
+                        aria-label="Email" name= "created_with_email" value="{{email}}" 
+                        autocomplete="off">
+                        <ul class="output selectpicker searchResult" style="display: none;"></ul>
+                      </div>
+                    
+                      <p>{{form.created_with.errors.0}}</p>
+                </div>
+                <div class="row mt-4">
+                    <div class="col  blue">
+                        
+                        <label class= 'label' for="startdate" class="form-label">Contract start date: </label>
+                        <div  class="input-group date custom-datepicker datee" data-date-format="yyyy-mm-dd" >
+                        <input type="text" class="form-control dateee startdate" id="startdate" placeholder="Select date"  name="contract_start_date" autocomplete="off"
+                        value = "{% if form.contract_start_date.value %}{{form.contract_start_date.value|date:'Y-m-d'}}{% endif %}">
+                        <span class="input-group-addon"><img id='calendar' src="{% static 'images/Vector-444.svg' %}" alt="calender"> </span>
+                        </div>
+                        <p>{{form.contract_start_date.errors.0}}</p>
+                    </div>
+                    <div class="col blue">
+                        
+                        <label class= 'label' for="startdate" class="form-label">Contract end date: </label>
+                        <div  class="input-group date custom-datepicker datee"     data-date-format="yyyy-mm-dd" >
+                        <input type="text" class="form-control dateee contract_end" id="startdate" placeholder="Select date" 
+                        name="contract_end_date">
+                        <span class="input-group-addon"><img id='calendar' src="{% static 'images/Vector-444.svg' %}" alt="calender"> </span>
+                        </div>
+                        <p>{{form.contract_end_date.errors.0}}</p>
+                        
+                    </div>
+                      <div class="col-md-5 blue resp-initial">
+                        
+                        <label class= 'label' for="initial" class="form-label">Initial Deposit: </label>
+                        <input type="number" class="form-control datee initial initial-amt" id="initial" placeholder="$50,00">
+                        
+                    </div>
+                </div>
+                <div class="row mt-4">
+                      <div class="col-md-5 blue total-blue resp-final">
+                        <label class= 'label total-label' for="initial" class="form-label">Total Amount: </label>
+                        <input type="number" class="form-control datee initial total-input" 
+                        id="initial" placeholder="$50,00" name="amount">  
+                    </div>
+                </div>
+
+
+                <div class="contract-textarea">
+                  <div class="contract-text-area">
+                    <input class='summary' type="hidden" value="" name="summary">
+                    <input class='request-user' type="hidden" value="{{request.user.first_name}} {{request.user.last_name}}">
+                    <input id='rcp-user-occ' type="hidden" value="{{contract_template.contract_type.name}}">
+                    <input class='request-user-con' type="hidden" value="{{request.user.country}}">
+                    <input class='request-user-city' type="hidden" value="{{request.user.city}}">
+                    <p class="summary-ini">
+                      {{contract_template.agreement | safe}}
+                    </p>
+                  </div>
+                  
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close">Back</button>
+                  <button type="submit" class="btn btn-primary">Send</button>
+                </div>
+              </form>
+              
+          </div><h1 style="width: auto;"></h1>
+        </div>
+        
+      </div> 
+    </div>
+  </div>
+
+

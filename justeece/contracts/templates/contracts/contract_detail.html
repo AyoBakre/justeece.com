@@ -1,0 +1,268 @@
+{% extends 'layout.html' %}{% load static %}
+{% block extrastyles %}
+<link
+rel="stylesheet"
+href="{% static 'lib/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css' %}"
+/>    
+<link rel="stylesheet" href="{% static 'css/landingPage/index.css' %}" />
+<link
+rel="stylesheet"
+href="{% static 'lib/bootstrap-select-1.13.14/dist/css/bootstrap-select.min.css' %}"
+/>
+<link
+rel="stylesheet"
+href="{% static 'css/modal/index.css' %}"
+/>
+<link rel="stylesheet" href="{% static 'css/contract/index.css' %}" />
+<style>
+  #updateContract {
+    z-index: 999;
+  }
+  .btn-primary {
+    color: #fff !important;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+.btn-primary:hover {
+    color: #1877f2 !important;
+    background-color: #fff !important;
+    border: 1px solid #1877f2 !important;
+}
+</style>
+{% endblock %}
+{% block content %}
+    <div class="content-wrapper">
+      <div class="container">
+        <div class="form-wrapper contract-page-parent-wrapper">
+          <div class="contract-page">
+            <!-- <div class="contract-page-image-section">
+              <img src="{% static 'images/contract.svg' %}" alt="contract" />
+            </div> -->
+            <h2 class="form-header">Contract details</h2>
+            <h5 class="form-header-small">View contract details below</h5>
+            <!-- Contract section for last page start -->
+            <!-- <h2 class="form-header">Your contract has been created</h2> -->
+            <!-- <h5 class="form-header-small">
+              <span
+                >An email has been sent to
+                <span>a.kutsan1994@gmail.com</span> to accept</span
+              ><span>
+                this contract. We will notify you if any changes are
+                needed</span
+              >
+            </h5> -->
+            <!-- <div class="buttons-wrapper">
+              <button class="btn btn-outline-primary">Go to main page</button>
+            </div> -->
+            <!-- Contract section for last page end -->
+            <div class="contract-wrapper">
+              <div class="contract-wrapper-section">
+                <div class="contract-wrapper-header">
+                  <div class="contract-wrapper-header-left">
+                    <span class="dispute-wrapper-head">Status of contract</span
+                    ><span class="dispute-wrapper"
+                      ><img
+                        src="{% static 'images/contract-dispute.svg' %}"
+                        alt="dispute"
+                      /><span>{{contract.get_status_display }}</span></span
+                    >
+                  </div>
+                  {% if request.user == contract.created_with %}
+                  <div class="contract-wrapper-header-right">
+                    <div class="contract-wrapper-header-right-head">
+                        <span>{{contract.created_by.first_name}} {{contract.created_by.last_name}}</span
+                            >
+                        <span class="completed">{{contract.created_by.email}}</span
+                      ><span>
+                        <img
+                          class="card-img-top"
+                          src="{% if contract.created_by.profile_photo %}{{contract.created_by.profile_photo.url}}{% else %}{% static 'images/profile_img.png' %} {% endif %}"
+                          alt=""
+                        />
+                      </span>
+                    </div>
+                  </div>
+                  {% else %}
+                  <div class="contract-wrapper-header-right">
+                    <div class="contract-wrapper-header-right-head">
+                        <span>{{contract.created_with.first_name}} {{contract.created_with.last_name}}</span
+                            >
+                        <span class="completed">{{contract.created_with.email}}</span
+                      ><span>
+                        <img
+                          class="card-img-top"
+                          src="{% if contract.created_with.profile_photo %}{{contract.created_with.profile_photo.url}}{% else %}{% static 'images/profile_img.png' %} {% endif %}"
+                          alt=""
+                        />
+                      </span>
+                    </div>
+                  </div>
+                  {% endif %}
+                </div>
+                <div class="contract-wrapper-content">
+                  <div class="contract-wrapper-content-section">
+                    <div class="contract-wrapper-content-section-wrapper">
+                      <div
+                        class="contract-wrapper-content-section-wrapper-child"
+                      >
+                        <div class="contract-wrapper-content-section-header">
+                          Contract type:
+                        </div>
+                        <div class="contract-wrapper-content-section-content">
+                          {{contract.contract_type}}
+                        </div>
+                      </div>
+                      <div
+                        class="contract-wrapper-content-section-wrapper-child"
+                      >
+                        <div class="contract-wrapper-content-section-header">
+                          Subcategory:
+                        </div>
+                        <div class="contract-wrapper-content-section-content">
+                          {{contract.subcategory}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="contract-wrapper-content-section">
+                    <div class="contract-wrapper-content-section-header">
+                      Contract summary:
+                    </div>
+                    <div class="contract-wrapper-content-section-content">
+                      {{contract.summary | safe}}
+                    </div>
+                  </div>
+                  <div class="contract-wrapper-content-section">
+                    <div class="contract-wrapper-content-section-wrapper">
+                      <div
+                        class="contract-wrapper-content-section-wrapper-child"
+                      >
+                        <div class="contract-wrapper-content-section-header">
+                          Contract start date:
+                        </div>
+                        <div class="contract-wrapper-content-section-content">
+                          {{contract.contract_start_date}}
+                        </div>
+                      </div>
+                      <div
+                        class="contract-wrapper-content-section-wrapper-child"
+                      >
+                        <div class="contract-wrapper-content-section-header">
+                          Contract end date:
+                        </div>
+                        <div class="contract-wrapper-content-section-content">
+                          {{contract.contract_end_date}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="contract-wrapper-content-section">
+                    <div class="contract-wrapper-content-section-wrapper">
+                      <div
+                        class="contract-wrapper-content-section-wrapper-child contract-wrapper-content-section-wrapper-child-last-section"
+                      >
+                        <div class="contract-wrapper-content-section-header">
+                          Amount included
+                        </div>
+                        {% if contract.amount %}
+                        <div class="contract-wrapper-content-section-content">
+                          ${{contract.amount}}
+                        </div>
+                        {% else %}
+                        <div class="contract-wrapper-content-section-content">
+                            None
+                          </div>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                  {% if contract.get_status_display  == 'Pending' and contract.created_with == request.user %}
+                  <div class="contract-wrapper-content-section contract-wrapper-footer">
+                    <a class="btn btn-outline-primary" id="updateContract" data-action_key="reject-contract" data-href="{% url 'contracts:update-contract' id=contract.id %}?update=reject">
+                      Reject
+                    </a>
+                    <a class="btn btn-primary" id="updateContract" href="#"  data-action_key="accept-contract" data-href="{% url 'contracts:update-contract' id=contract.id %}?update=accept">Accept</a>
+                  </div>
+                  {% elif contract.get_status_display == 'In Progress' and contract.created_with == request.user %}
+                  <div
+                  class="contract-wrapper-content-section contract-wrapper-footer"
+                >
+                  <a class="btn btn-outline-primary" id="updateContract" data-action_key="cancel-contract" data-href="{% url 'contracts:update-contract' id=contract.id %}?update=cancel">
+                    Cancel contract
+                  </a>
+                  <a class="btn btn-primary" id="updateContract" data-action_key="end-contract" data-href="{% url 'contracts:update-contract' id=contract.id %}?update=end">End contract</a>
+                </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- Modal -->
+<div class="modal fade" id="updateContractModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1Title" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered common-modal end-contract" role="document">
+    <div class="modal-content">
+      <div class="form-wrapper contact-page-parent-wrapper personal-detail">
+          <h2 class="form-header">Write a testimonial</h2>
+          <form class="contact-page feedback_testimonial" method="post" action="{% url 'contracts:update-contract' id=contract.id %}">
+            {% csrf_token %}
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M1 1L21 21M1 21L21 1" stroke="#1877F2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                </button>
+<div class="modal-body">
+               {% include 'contracts/partials/end_contract_partials.html' %}
+        </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-primary cancel">Cancel</button> 
+        <button type="submit" class="btn btn-primary" id="testimonial_submit">Finish</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!--Modal-->
+    {% endblock %}
+{% block extrascript %}
+<script>
+  $(document).on("click","#updateContract",function(event) {
+    action_url = $(this).attr('data-href')
+    action_key = $(this).attr('data-action_key')
+    data = {
+      'action_key':action_key
+    }
+    $.ajax({
+        url: action_url,
+        method: "GET",
+        data: data,
+        success: function (data) {
+          if (action_key=="accept-contract") {
+            heading="Accept contract"
+          }
+          else if (action_key=="reject-contract") {
+            heading="Reject contract"
+          }
+          else if (action_key=="cancel-contract") {
+            heading="Cancel contract"
+          }
+          else if (action_key=="end-contract") {
+            heading="End contract"
+          }
+
+          $('#updateContractModal .form-header').html(heading)
+          $('#updateContractModal .modal-body').html(data)
+          $('#updateContractModal form').attr('action', action_url);
+          $('.selectpicker').selectpicker();
+          $('#updateContractModal').modal('show');
+          
+          // location.reload()
+        },
+    })
+    
+  })
+ 
+</script>
+{% endblock %}

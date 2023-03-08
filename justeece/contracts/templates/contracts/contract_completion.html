@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}{% load static %}
+{% block extrastyles %}
+<link
+rel="stylesheet"
+href="{% static 'lib/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css' %}"
+/>    
+<link rel="stylesheet" href="{% static 'css/landingPage/index.css' %}" />
+<link
+rel="stylesheet"
+href="{% static 'lib/bootstrap-select-1.13.14/dist/css/bootstrap-select.min.css' %}"
+/>
+<link
+rel="stylesheet"
+href="{% static 'css/modal/index.css' %}"
+/>
+<link rel="stylesheet" href="{% static 'css/contract/index.css' %}" />
+{% endblock %}
+{% block content %}
+    <div class="content-wrapper">
+      <div class="container">
+        <div class="form-wrapper contract-page-parent-wrapper">
+          <div class="contract-page">
+            <div class="contract-page-image-section">
+              <img src="{% static 'images/contract.svg' %}" alt="contract" />
+            </div>
+
+            <!-- Contract section for last page start -->
+            <h2 class="form-header">Your contract has been created</h2>
+            <h5 class="form-header-small">
+              <span
+                >An email has been sent to
+                <span>{{email}}</span> to accept</span
+              ><span>
+                this contract. We will notify you if any changes are
+                needed</span
+              >
+            </h5>
+            <div class="buttons-wrapper contract-complete">
+              <a href="{% url 'accounts:dashboard' %}" class="btn btn-outline-primary">Go to main page</a>
+            </div>
+            <!-- Contract section for last page end -->
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

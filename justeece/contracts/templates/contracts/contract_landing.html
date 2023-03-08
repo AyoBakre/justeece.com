@@ -1,0 +1,164 @@
+{% extends 'layout.html' %}{% load static %}
+{% block extrastyles %}
+<link rel="stylesheet" href="{% static 'lib/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css' %}" />
+<link rel="stylesheet" href="{% static 'css/landingPage/index.css' %}" />
+<style>
+
+  .card-profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 0 20px 0;
+    justify-content: center;
+  }
+
+  .card-img-top {
+    max-width: 100px;
+    border-radius: 50%;
+    margin: 0px 10px 0 15px;
+    box-shadow: 0px 3px 20px rgb(131 130 130 / 20%);
+    width: 60px;
+    height: 60px;
+  }
+
+  #search-bar {
+    display: block;
+    margin: .25em 0 0;
+    width: 100%;
+    padding: .25em .5em;
+    font-size: 1.2em;
+  }
+
+  .output,
+  #search-bar {
+    background: #fff;
+    border: 1px solid #767676;
+  }
+
+  .prediction-item {
+    padding: .5em .75em;
+    transition: color 0.2s, background 0.2s;
+  }
+
+  .output {
+    list-style: none;
+    width: 100%;
+    min-height: 0px;
+    border-top: 0 !important;
+    color: #767676;
+    font-size: .75em;
+    transition: min-height 0.2s;
+    position: absolute;
+    z-index: 5;
+  }
+  .output:hover .focus {
+    background: #fff;
+    color: #767676;
+  }
+
+
+  .prediction-item:hover {
+    cursor: pointer;
+  }
+
+  .prediction-item:hover,
+  .focus,
+  .output:hover .focus:hover {
+    background: #ddd;
+    color: #333;
+  }
+  .noclick {
+    pointer-events: none;
+  }
+
+  .prediction-item strong {
+    color: #333;
+  }
+
+  .prediction-item:hover strong {
+    color: #000;
+  }
+
+  /* p { margin-top: 1em; }
+h1 { color: #439973; padding-bottom: 5px; border-bottom: 2px dotted #439973; font-family: 'Patua One'; }
+span { font-size: 1.5em; } */
+  .down_arrows {
+    padding: 60px;
+  }
+</style>
+<link rel="stylesheet" href="{% static 'lib/bootstrap-select-1.13.14/dist/css/bootstrap-select.min.css' %}" />
+<link rel="stylesheet" href="{% static 'css/modal/index.css' %}" />
+<link rel="stylesheet" href="{% static 'css/contract/landing.css'%}" />
+{% endblock %}
+{% block content %}
+<div class="content-wrapper">
+  <div class="container header">
+    <div class="form-wrapper landing-page-parent-wrapper">
+      <h5 id="header" class="form-header-small">
+        World's #1 Online Contract Performance Database
+      </h5>
+      <h2 id= 'header-hs' class="form-header">Check Contract History Here</h2>
+      <form class="landing-page abc" action="{% url 'app:search' %}" method="get">
+        <div class="form-group ">
+          <div class="input-field-wrapper">
+            <input type="text" placeholder="Enter a person's phone number or email" name="search"
+              class="form-field form-control" autocomplete="off" />
+            <span class="email-icon "><img src="{% static 'images/search-icon.svg' %}" alt="search" /></span>
+          </div>
+          <button type="submit" class="btn btn-primary">Check</button>
+        </div>
+      </form>
+      <!-- logged in section -->
+      {% if request.user.is_authenticated %}
+        <h1 class= 'send-header'>Send Contract to Anyone <span>in Just 3 Clicks</span></h1>
+        <div class="row contract-page-link-row">
+          
+          <a class="contract-page-link col-md-4 mr-5" href="{% url 'contracts:contract-template' %}">
+          <div>
+              <h3 class="contract-page-link-h3">Template Contracts</h3>
+                <img src="{% static 'images/Frame 3843.svg' %}" alt="">
+          </div>
+          </a>
+          <a class="contract-page-link mr-5 col-md-4" href="#">
+            <div>
+                <h3 class="contract-page-link-h3">Custom Contracts</h3>
+                  <img src="{% static 'images/Frame 3843.svg' %}" alt="">
+            </div>
+            </a>
+        </div>
+      {% endif %}
+      <!-- unlogged in section ends-->
+      <h2 class="form-header">How it works</h2>
+      <h5 class="align-middle form-header-small">
+        Simply follow the three steps below to obtain information about a person
+      </h5>
+      <div class="landing-page-wrapper how-it-works">
+        <div class="image-wrapper">
+          <span class="image-count">01</span>
+          <span class="image-wrapper-image"><img src="{% static 'images/image1.svg' %}" alt="image" /></span>
+          <span class="image-wrapper-text "><span>Provide the phone number or email</span> of the person you
+            want to deal with</span>
+        </div>
+        <div class="image-wrapper">
+          <span class="image-count">02</span>
+          <span class="image-wrapper-image "><img src="{% static 'images/image2.svg' %}" alt="image" /></span>
+          <span class="image-wrapper-text"><span>Find the person here</span> and see whether he or she is
+            a trustworthy person</span>
+        </div>
+        <div class="image-wrapper">
+          <span class="image-count">03</span>
+          <span class="image-wrapper-image"><img src="{% static 'images/image3.svg' %}" alt="image" /></span>
+          <span class="image-wrapper-text ">If you are satisfied with the findings
+            <span>begin dealing with the person</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    {% endblock %}
+    {% block extrascript %}
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'lib/OwlCarousel2-2.3.4/dist/owl.carousel.js' %}"></script>
+    <script src="{% static 'js/landingPage.js' %}"></script>
+    <script src="{% static 'lib/bootstrap/js/bootstrap.bundle.js' %}"></script>
+    {% endblock %}

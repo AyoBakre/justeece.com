@@ -1,0 +1,50 @@
+@font-face {
+    font-family: "Helvetica";
+    src: url("../../fonts/Helvetica.ttf");
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "HelveticaNowDisplay-Light";
+    src: url("../../fonts/HelveticaNowDisplay-Light\ \(1\).woff") format("woff");
+  }
+  .icon-color{
+    color: #484A47;
+  }
+.footer-nav-tabs {
+  display: flex;
+  padding: 10px 0;
+  flex-direction: row;
+  font-family: 'Helvetica', sans-serif;
+}
+.footer-nav-tabs a {
+  font-family: "HelveticaNowDisplay-Light", sans-serif;
+  padding: 0 10px;
+  color: #484a47;
+  font-size: 16px;
+}
+.footer-social-tabs {
+  padding: 10px 0 0 0;
+}
+.footer-social-tabs a {
+  padding: 0 15px;
+  color: #484a47;
+}
+.content-footer .container {
+  min-height: 25vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-size: 15px;
+}
+.content-footer .copyright-bar {
+  display: flex;
+  justify-content: center;
+  background-color: #f2f2f2;
+  color: #484a4777;
+  height: calc(1.5em + 0.75rem + 10px);
+  font-size: 14px;
+  align-items: center;
+}

@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}{% block content %} {% load i18n %} {% block pageclass %} {% endblock %} {% load staticfiles static %}
+<title>Verification Successfull!</title>
+<div class="content-wrapper">
+<div class="content">
+    <div class="form-wrapper">
+        <h2 class="text-center">Verification Successfull!</h2>
+        <p class="w-auto mx-auto text-center">Email has been verified successfully!</p>
+        <form class="mt-4 sign-up">
+            <div class="navbar-text">
+                <a href="{% url 'accounts:login' %}" class="btn btn-primary" >Login</a>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+
+{% endblock %}

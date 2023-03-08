@@ -1,0 +1,121 @@
+{% extends 'layout.html' %}{% load static %}
+{% block extrastyles %}
+<link
+rel="stylesheet"
+href="{% static 'css/modal/index.css' %}"
+/>
+<style>
+  ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #909;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #909;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #909;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #909;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+   color:    #909;
+}
+
+input.cover_letter_box::placeholder { /* Most modern browsers support this now. */
+    top:10px;
+    padding-left: 15px;
+    position: absolute;
+}
+.cover_letter_box {
+    min-height: 176px;
+}
+.cover_letter_label {
+    font-family: "Helvetica", sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    padding-left: 15px;
+    width: 100%;
+    margin-bottom: 0px !important;
+}
+
+.register-form :nth-child(n) {
+    margin-top: 0px;
+}
+
+</style>
+{% endblock %}
+{% block content %}
+    <div class="content-wrapper">
+      <div class="container">
+        <div class="d-flex flex-column justify-content-center wrapper-form">
+          <div class="form-wrapper">
+              {% if request.user.cover_letter %}
+                <h2 class="form-header">Edit cover letter</h2>
+              {% else %}
+                <h2 class="form-header">Create cover letter</h2>
+              {% endif %}
+            <form method="POST" action="{% url 'accounts:create-cover-letter' %}" class="register-form" id="coverLetter">
+              {% csrf_token %}
+              <label class="cover_letter_label">Cover letter</label>
+              <div class="form-group">
+
+                <textarea
+                id="subject"
+                placeholder="Describe yourself..."
+                class="form-field form-control cover_letter_box"
+                name="cover_letter"
+                required
+              >{% if request.user.cover_letter %}{{request.user.cover_letter}}{% endif %}</textarea>
+              </div>
+              <button type="button" class="btn btn-primary form-btn create_cover_submit">
+                save
+              </button>
+              <div class="invalid-tooltip-message text-danger"> {{form.cover_letter.errors.0}} </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+<div class="modal fade" id="createCoverLetterThanks" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered common-modal" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <img src="{% static 'images/resume-pana1.svg' %}" alt="resume" />
+          <p class="bold">Thank you! Your cover letter has been created</p>
+          <p>Thank you! Your cover letter has been created
+
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary back_btn">Back to the profile page</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--Modal-->
+{% endblock %}
+
+{% block extrascript %}
+<script>
+    $(document).on('click','.create_cover_submit',function(event){
+        $.ajax({
+              url: '/accounts/create_cover_letter/',
+              type: 'post',
+              data: $('#coverLetter').serialize(),
+              dataType: 'json',
+              success:function(response){
+                $('#createCoverLetterThanks').modal('show');
+              }
+          });
+    });
+
+    $('.back_btn').on('click',function(){
+        window.location.href = '/accounts/profile'
+      })  
+</script>
+
+{% endblock %}

@@ -1,0 +1,614 @@
+{% extends 'layout.html' %}{% load static %}
+{% block extrastyles %}
+<link rel="stylesheet" href="{% static 'lib/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css' %}" />
+<link rel="stylesheet" href="{% static 'css/landingPage/index.css' %}" />
+<style>
+  #search-bar {
+    display: block;
+    margin: .25em 0 0;
+    width: 100%;
+    padding: .25em .5em;
+    font-size: 1.2em;
+  }
+
+  .card-profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 0 20px 0;
+    justify-content: center;
+  }
+
+  .card-img-top {
+    max-width: 100px;
+    border-radius: 50%;
+    margin: 0px 10px 0 15px;
+    box-shadow: 0px 3px 20px rgb(131 130 130 / 20%);
+    width: 60px;
+    height: 60px;
+  }
+
+  .output {
+    list-style: none;
+    width: 100%;
+    min-height: 0px;
+    border-top: 0 !important;
+    color: #767676;
+    font-size: .75em;
+    transition: min-height 0.2s;
+    position: absolute;
+    z-index: 5;
+  }
+
+  .output,
+  #search-bar {
+    background: #fff;
+    border: 1px solid #767676;
+  }
+
+  .prediction-item {
+    padding: .5em .75em;
+    transition: color 0.2s, background 0.2s;
+  }
+
+  .output:hover .focus {
+    background: #fff;
+    color: #767676;
+  }
+
+  .prediction-item:hover,
+  .focus,
+  .output:hover .focus:hover {
+    background: #ddd;
+    color: #333;
+  }
+
+  .prediction-item:hover {
+    cursor: pointer;
+  }
+
+  .noclick {
+    pointer-events: none;
+  }
+
+  .prediction-item strong {
+    color: #333;
+  }
+
+  .prediction-item:hover strong {
+    color: #000;
+  }
+
+  /* p { margin-top: 1em; }
+h1 { color: #439973; padding-bottom: 5px; border-bottom: 2px dotted #439973; font-family: 'Patua One'; }
+span { font-size: 1.5em; } */
+  .down_arrows {
+    padding: 60px;
+  }
+</style>
+<link rel="stylesheet" href="{% static 'lib/bootstrap-select-1.13.14/dist/css/bootstrap-select.min.css' %}" />
+<link rel="stylesheet" href="{% static 'css/modal/index.css' %}" />
+<link rel="stylesheet" href="{% static 'css/contract/landing.css'%}">
+{% endblock %}
+{% block content %}
+<div class="content-wrapper">
+  <div class="container">
+    <div class="form-wrapper landing-page-parent-wrapper">
+      <h5 class="form-header-small">
+        Platform that holds agreement between any two people
+      </h5>
+      <h2 class="form-header">Check Anyone's Past Records</h2>
+      <form class="landing-page" action="{% url 'app:search' %}" method="get">
+        <div class="form-group">
+          <div class="input-field-wrapper">
+            <input type="text" placeholder="Search by service, email or phone number" name="search"
+              class="form-field form-control" autocomplete="off" />
+            <span class="email-icon"><img src="{% static 'images/search-icon.svg' %}" alt="search" /></span>
+          </div>
+          <button type="submit" class="btn btn-primary">Check</button>
+        </div>
+        
+      </form>
+      <!-- logged in section -->
+      {% if request.user.is_authenticated %}
+      <h1 class= 'send-header'>Send Contract to Anyone <span>in Just 3 Clicks</span></h1>
+      <div class="row contract-page-link-row">
+        
+        <a class="contract-page-link mr-5 col-md-4" href="{% url 'contracts:contract-template' %}">
+        <div>
+            <h3 class="contract-page-link-h3">Template Contracts</h3>
+              <img src="{% static 'images/Frame 3843.svg' %}" alt="">
+        </div>
+        </a>
+        <a class="contract-page-link mr-5 col-md-4 hide" href="#" onclick="hideDiv()">
+          <div>
+              <h3 class="contract-page-link-h3">Custom Contracts</h3>
+                <img src="{% static 'images/Frame 3843.svg' %}" alt="">
+          </div>
+          </a>
+      </div>
+
+
+
+      <div class="align-data logged-in-section logged-in-section-create" id="create_contract_section" style="display: none;">
+        <div class="logged-in-section-text">
+          <span>Create a new contract</span><button class="hideDiv" >
+            <img src="{% static 'images/right-arrow.svg' %}" alt="arrow" />
+          </button>
+        </div>
+      </div>
+      <div class="align-data logged-in-section logged-in-section-hidden">
+        <div class="logged-in-section-text">
+          <span>Create a new contract</span><span class="logged-in-section-text-small">Who do you want to have a
+            contract with?
+          </span>
+        </div>
+        <form class="landing-page landing-page-card" action="/contracts/create_contract">
+          <div class="form-group">
+            <div class="input-field-wrapper" id="search_text_box">
+              <input type="text" placeholder="Enter phone number or email" name="search" class="form-field form-control"
+                autocomplete="off" id="search-bar" style="color:black" />
+              <ul class="output selectpicker" style="display: none;" id="searchResult">
+              </ul>
+            </div>
+            <button type="submit" class="btn btn-primary" style="margin-top:6px">
+              <img src="{% static 'images/right-arrow.svg' %}" alt="arrow" />
+            </button>
+          </div>
+        </form>
+      </div>
+      {% endif %}
+      <div class="down_arrows">
+        <img src="{% static 'images/down_arrows.png' %}" alt="arrow" />
+      </div>
+      <h2 class="form-header">How it works</h2>
+      <h5 class="form-header-small align-middle">
+        Simply follow the three steps below to obtain information about a person
+      </h5>
+      <div class="landing-page-wrapper how-it-works">
+        <div class="image-wrapper">
+          <span class="image-count">01</span>
+          <span class="image-wrapper-image"><img src="{% static 'images/image1.svg' %}" alt="image" /></span>
+          <span class="image-wrapper-text"><span>Provide the phone number or email</span> of the person you
+            want to deal with</span>
+        </div>
+        <div class="image-wrapper">
+          <span class="image-count">02</span>
+          <span class="image-wrapper-image"><img src="{% static 'images/image2.svg' %}" alt="image" /></span>
+          <span class="image-wrapper-text"><span>Find the person here</span> and see whether he or she is
+            a trustworthy person</span>
+        </div>
+        <div class="image-wrapper">
+          <span class="image-count">03</span>
+          <span class="image-wrapper-image"><img src="{% static 'images/image3.svg' %}" alt="image" /></span>
+          <span class="image-wrapper-text">If you are satisfied with the findings
+            <span>begin dealing with the person</span></span>
+        </div>
+      </div>
+      <div class="landing-page-wrapper the-goal-wrapper">
+        <h2 class="form-header the-goal-wrapper-header">
+          We want to <span>make it easier</span> to have online transaction
+          with <span>total strangers</span>
+        </h2>
+        <h2 class="form-header">The goal</h2>
+        <div class="the-goal-image-section">
+          <div class="image-wrapper">
+            <span class="image-wrapper-image"><img src="{% static 'images/image4.svg' %}" alt="image" /></span>
+            <span class="image-wrapper-text"><span>Without</span> Justeece.com</span>
+          </div>
+          <div class="image-wrapper">
+            <span class="image-wrapper-image"><img src="{% static 'images/image6.svg' %}" alt="image" /></span>
+            <span class="image-wrapper-text image-wrapper-text-colored">Filter</span>
+          </div>
+          <div class="image-wrapper">
+            <span class="image-wrapper-image"><img src="{% static 'images/image5.svg' %}" alt="image" /></span>
+            <span class="image-wrapper-text"><span>With</span> Justeece.com</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--
+  <div class="container our_partners_section">
+    <div class="landing-page-wrapper d-flex flex-column testimonial-wrapper">
+      <h2 class="form-header mt-lg-5 pt-lg-5 pt-md-5">Partner Companies</h2>
+      <div class="our_partners">
+        <div class="owl-carousel owl-carousel2 owl-theme">
+          {% for partner in our_partners %}
+          <div class="card partner" data-slide-index="{{ forloop.counter0 }}">
+            <img class="lazyOwl img_width" src="{{ partner }}" alt="comma" />
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  -->
+    <div class="container testimonials-section mt-5">
+
+      <div class="container testimonials-section">
+        <div class="landing-page-wrapper testimonial-wrapper">
+          <h2 class="form-header">Service Providers</h2>
+          <div class="gtco-testimonials">
+            <div class="owl-carousel owl-carousel1 owl-theme">
+              {% for service_provider in service_providers %}
+              <div>
+                <div class="card text-center">
+                  <div class="card-body">
+                    <div class="card-profile">
+                      <img class="card-img-top provider-image"
+                        src="{% if service_provider.profile_photo %}{{service_provider.profile_photo.url}}{% else %}{% static 'images/profile_img.png' %} {% endif %}"
+                        alt="" />
+                    </div>
+                    <h5 class="provider-card-text">
+                      {{service_provider.occupation}} 
+                    </h5>
+                    <p class="card-text">
+                      {{service_provider.about_me|truncatechars:80}}{% if service_provider.about_me|length > 80 %}<a href="#"
+                        class="click_vm" data-feedback="{{service_provider.about_me}}">View more</a> {% endif %}
+                    </p>
+                    
+                    {% if service_provider.reference_for_user.count > 0 %}
+                    <div class="provider-ref">
+
+                          {% if service_provider.reference_for_user.count is 1 %}
+                          <h3 class="provider-ref-title">Referred By {{ service_provider.reference_for_user.count }} Person </h3>
+                          {% else %}
+                          <h3 class="provider-ref-title">Referred By {{ service_provider.reference_for_user.count }} People </h3>
+                          {% endif %} 
+                          <div class="img-container">
+                            {% for i in service_provider.reference_for_user.all %}
+
+                              <img src="{{ i.profile_photo.url }}" alt="" class="provider-section-img">
+                        
+                            {% endfor %}
+                         </div>
+                    </div>
+                    {% endif %}
+                  </div>
+                  
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--
+    <div class="container testimonials-section">
+
+      <div class="container testimonials-section">
+        <div class="landing-page-wrapper testimonial-wrapper">
+          <h2 class="form-header">Testimonials</h2>
+          <h5 class="form-header-small">What our clients are saying</h5>
+          <div class="gtco-testimonials">
+            <div class="owl-carousel owl-carousel1 owl-theme">
+              {% for feedback in all_feedbacks %}
+              <div>
+                <div class="card text-center">
+                  <div class="card-body">
+                    <div class="card-header-comma">
+                      <img src="{% static 'images/comma.svg' %}" alt="comma" />
+                    </div>
+                    <p class="card-text">
+                      {{feedback.feedback|truncatechars:80}}{% if feedback.feedback|length > 80 %}<a href="#"
+                        class="click_vm" data-feedback="{{feedback.feedback}}">View more</a> {% endif %}
+                    </p>
+                  </div>
+                  <div class="card-profile">
+                    <img class="card-img-top"
+                      src="{% if feedback.user.profile_photo %}{{feedback.user.profile_photo.url}}{% else %}{% static 'images/profile_img.png' %} {% endif %}"
+                      alt="" />
+                    <h5>
+                      {{feedback.user.first_name}} {{feedback.user.last_name}}<br />
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+
+          {% if request.user.is_authenticated %}
+          <div class="write-testimonial">
+            <button class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalCenter1">Write a
+              testimonial</button>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  -->
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalCenter1Title" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered common-modal end-contract" role="document">
+        <div class="modal-content">
+          <div class="form-wrapper contact-page-parent-wrapper personal-detail">
+            <h2 class="form-header">Write a testimonial</h2>
+            <form class="contact-page feedback_testimonial" method="post" action="{% url 'app:testimonial' %}">
+              {% csrf_token %}
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 1L21 21M1 21L21 1" stroke="#1877F2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+              <div class="modal-body">
+                <div class="form-group">
+                  <label for="subject">Feedback</label>
+                  <textarea id="subject" name="{{feedback_form.feedback.name}}" placeholder=""
+                    class="form-field form-control testimonial_feedback"></textarea>
+                </div>
+                <p class="error_text d-none"> Please fill the feedback</p>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary cancel">Cancel</button>
+                <button type="button" class="btn btn-primary" id="testimonial_submit">Finish</button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Modal-->
+
+    <!-- Modal -->
+    <div class="modal fade" id="feedback_modal" tabindex="-1" role="dialog" aria-labelledby="feedback_modalTitle"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered common-modal end-contract" role="document">
+        <div class="modal-content">
+          <div class="form-wrapper contact-page-parent-wrapper personal-detail">
+            <form class="contact-page feedback_testimonial">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 1L21 21M1 21L21 1" stroke="#1877F2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+              <div class="modal-body">
+                <div class="card-header-comma" style="width: 34px;">
+                  <img src="{% static 'images/comma.svg' %}" alt="comma" />
+                </div>
+                <p class='card-text' style='line-break:anywhere;padding-top: 10px;margin: 0px 0px 10px 0px;'></p>
+                <div class="card-header-comma" style="width: 34px; float: right;">
+                  <img src="{% static 'images/in_comma.png' %}" alt="comma" style="width: 32px; height: 32px;" />
+                </div>
+                <div class="card-profile" style="padding-top: 40px;">
+                  <img class="card-img-top"
+                    src="{% if feedback.user.profile_photo %}{{feedback.user.profile_photo.url}}{% else %}{% static 'images/profile_img.png' %} {% endif %}"
+                    alt="" />
+                  <h5>
+                    {{feedback.user.first_name}} {{feedback.user.last_name}}<br />
+                  </h5>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Modal-->
+    {% endblock %}
+    {% block extrascript %}
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'lib/OwlCarousel2-2.3.4/dist/owl.carousel.js' %}"></script>
+    <script src="{% static 'js/landingPage.js' %}"></script>
+    <script src="{% static 'lib/bootstrap/js/bootstrap.bundle.js' %}"></script>
+    <script>
+      $(document).ready(() => {
+        carousels();
+        carouselss();
+      });
+      $(document).on("click", "#testimonial_submit", function (event) {
+        event.stopImmediatePropagation();
+        value = $(".testimonial_feedback").val()
+        if (value.length == 0) {
+          $('.error_text').text("Please fill the feedback")
+          $('.error_text').removeClass('d-none')
+        }
+        else if (value.length < 15 || value.length > 250) {
+          $('.error_text').text("Minimum and maximum character limit is 15 and 250 respectively")
+          $('.error_text').removeClass('d-none')
+        }
+        else {
+          action_url = $(".feedback_testimonial").attr('action')
+          var csrf_token = $('meta[name="csrf-token"]').attr('content');
+          data = {
+            "feedback": value,
+            "csrfmiddlewaretoken": encodeURIComponent(csrf_token)
+          }
+          // $('.feedback_testimonial').submit()
+          $.ajax({
+            url: action_url,
+            method: "POST",
+            data: data,
+            success: function (data) {
+              location.reload()
+            },
+            error: function (data) {
+              $('.error_text').text("Minimum and maximum character limit is 15 and 250 respectively")
+              $('.error_text').removeClass('d-none')
+            }
+          })
+        }
+
+      })
+    </script>
+    <script>
+
+      $(document).ready(function () {
+        $(".hide").click(function () {
+          $(".contract-page-link-row").hide();
+          $('html,body').animate({
+            scrollTop: $(".send-header").offset().top},
+            'slow');
+      });
+
+        /*var $terms = [
+          'search',
+          'test',
+          'css',
+          'apple',
+          'bear',
+          'cat',
+          'crabapple',
+          'creep',
+          'czar',
+          'danger',
+          'dominant',
+          'doppler',
+          'everclear',
+          'evangelism',
+          'frodo'
+           ].sort(),
+           $return = [];
+          
+        function strInArray(str, strArray) {
+          for (var j=0; j<strArray.length; j++) {
+            if (strArray[j].match(str) && $return.length < 5) {
+              var $h = strArray[j].replace(str, '<strong>'+str+'</strong>');
+              $return.push('<li class="prediction-item"><span class="prediction-text">' + $h + '</span></li>');
+            }
+          }
+        }
+          
+        function nextItem(kp) {
+          if ( $('.focus').length > 0 ) {
+            var $next = $('.focus').next(),
+                $prev = $('.focus').prev();
+          }
+          
+          if ( kp == 38 ) { // Up
+          
+            if ( $('.focus').is(':first-child') ) {
+              $prev = $('.prediction-item:last-child');
+            }
+            
+            $('.prediction-item').removeClass('focus');
+            $prev.addClass('focus');
+            
+          } else if ( kp == 40 ) { // Down
+          
+            if ( $('.focus').is(':last-child') ) {
+              $next = $('.prediction-item:first-child');
+            }
+            
+            $('.prediction-item').removeClass('focus');
+            $next.addClass('focus');
+          }
+        }
+        
+        $(function(){  
+          $('#search-bar').keydown(function(e){
+            $key = e.keyCode;
+            if ( $key == 38 || $key == 40 ) {
+              nextItem($key);
+              return;
+            }
+            
+            setTimeout(function() {
+              var $search = $('#search-bar').val();
+              $return = [];
+              
+              strInArray($search, $terms);
+              
+              if ( $search == '' || ! $('input').val ) {
+                $('.output').html('').slideUp();
+              } else {
+                $('.output').html($return).slideDown();
+              }
+          
+              $('.prediction-item').on('click', function(){
+                $text = $(this).find('span').text();
+                $('.output').slideUp(function(){
+                  $(this).html('');
+                });
+                $('#search-bar').val($text);
+              });
+              
+              $('.prediction-item:first-child').addClass('focus');
+              
+            }, 50);
+          });
+        });
+          
+          $('#search-bar').focus(function(){
+            if ( $('.prediction-item').length > 0 ) {
+              $('.output').slideDown();
+            }
+            
+            $('#searchform').submit(function(e){
+              e.preventDefault();
+              $text = $('.focus').find('span').text();
+              $('.output').slideUp();
+              $('#search-bar').val($text);
+              $('input').blur();
+            });
+          });
+          
+          $('#search-bar').blur(function(){
+            if ( $('.prediction-item').length > 0 ) {
+              $('.output').slideUp();
+            }
+          });*/
+
+        $('#search-bar').focus(function () {
+          console.log("focus")
+          if ($('.prediction-item').length > 0) {
+            $('.output').slideDown();
+          }
+        })
+
+        $("#search-bar").keyup(function () {
+          console.log("keyup")
+          var search = $(this).val();
+          if (search != "") {
+
+            $.ajax({
+              url: '/accounts/user_list/' + search,
+              type: 'get',
+              data: { search: search },
+              dataType: 'json',
+              success: function (response) {
+                var len = response.length;
+                $("#searchResult").empty();
+                for (var i = 0; i < len; i++) {
+                  var id = response[i]['id'];
+                  var email = response[i]['email'];
+
+                  $("#searchResult").append('<li class="prediction-item"><span class="prediction-text" value=' + id + '>' + email + '</span></li>');
+                  // $("#searchResult").append("<li value='"+id+"'>"+email+"</li>");
+                }
+                if (len === 0) {
+                  $("#searchResult").append('<li class="prediction-item noclick"><span class="prediction-text" value="No result found">No result found</span></li>');
+
+                }
+
+                // binding click event to li
+                $("#searchResult li").bind("click", function () {
+                  $('#search-bar').val(this.childNodes[0].innerHTML);
+                  $('.output').slideUp();
+                });
+                $('.output').slideDown();
+
+              }
+            });
+          }
+
+        });
+
+
+
+      });
+
+      $(document).on("click", ".click_vm", function (event) {
+        event.preventDefault()
+        feedback = $(this).attr('data-feedback')
+        // feedback = "<p class='card-text' style='line-break:anywhere'>" + feedback + "</p>"
+        name_text = $(this).closest('.card').find('.card-profile').find('h5').text().trim()
+        img_text = $(this).closest('.card').find('.card-profile').find('img').attr('src')
+        $('#feedback_modal .modal-body p').html(feedback);
+        $('#feedback_modal .modal-body .card-profile h5').html(name_text);
+        $('#feedback_modal .modal-body .card-profile img').attr('src', img_text);
+        $("#feedback_modal").modal('show');
+      })
+    </script>
+    {% endblock %}

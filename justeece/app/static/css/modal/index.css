@@ -1,0 +1,222 @@
+.modal-dialog.common-modal{
+    width: calc(100% - 30px);
+    max-width: 530px;
+    margin: auto;
+}
+.modal-dialog.common-modal .modal-content{
+    padding: 50px 38px;
+}
+.modal-dialog.common-modal .modal-content .modal-body{
+    padding: 0px;
+    border: none;
+    text-align: center;
+}
+.modal-dialog.common-modal .modal-content .modal-body p.bold{
+width: 100%;
+font-weight: bold;
+font-size: 22px;
+line-height: 32px;
+text-align: center;
+color: #484A47;
+margin: 50px 0px 10px 0px;
+opacity: 1;
+}
+.modal-dialog.common-modal .modal-content .modal-body p{
+    width: 100%;
+    font-style: normal;
+font-weight: normal;
+font-size: 18px;
+line-height: 26px;
+text-align: center;
+color: #484A47;
+margin: 0px 0px 49px 0px;
+opacity: 0.7;
+}
+.modal-dialog.common-modal .modal-content .modal-footer{
+    justify-content: center;
+    padding: 0px;
+    border: none;
+}
+@media(max-width:767px){
+    .modal-dialog.common-modal .modal-content{
+        padding: 30px 15px;
+    }
+    .modal-dialog.common-modal .modal-content .modal-body p.bold{
+        font-size: 18px;
+        line-height: 24px;
+        margin: 25px 0px 10px 0px;
+        }
+        .modal-dialog.common-modal .modal-content .modal-body p{
+        font-size: 16px;
+        line-height: 22px;
+        margin: 0px 0px 25px 0px;
+        } 
+}
+
+#Modal
+
+.modal-dialog.modal-dialog-centered.common-modal.end-contract .form-wrapper.contact-page-parent-wrapper{
+    padding-top: 0px;
+}
+.modal-dialog.modal-dialog-centered.common-modal.end-contract .form-header{
+    font-size: 23px;
+    line-height: 32px;
+    margin: 0px 0px 30px 0px;
+}
+.modal-dialog.modal-dialog-centered.common-modal.end-contract .close{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: auto;
+    height: auto;
+    opacity: 1;
+}
+.modal-dialog.modal-dialog-centered.common-modal.end-contract .contact-page-parent-wrapper.personal-detail .contact-page .form-group label,.modal-dialog.modal-dialog-centered.common-modal.end-contract .edit-personal-details .form-group label{
+    text-align: left;
+}
+.modal-dialog.modal-dialog-centered.common-modal.end-contract .contact-page{
+    max-width: 100%;
+    width: 100%;
+}
+.modal-dialog.modal-dialog-centered.common-modal.end-contract button.btn.dropdown-toggle{
+    width: 100%;
+}
+.modal-dialog.modal-dialog-centered.common-modal.end-contract .modal-footer{
+    justify-content: flex-end;
+    padding-top: 30px;
+}
+.modal-dialog.modal-dialog-centered.common-modal.end-contract button{
+    width: 120px;
+    height: 44px;
+}
+.modal-dialog.modal-dialog-centered.common-modal.end-contract button.cancel{
+    width: auto;
+    background-color: transparent !important;
+    color: #1877f2;
+    border: none !important;
+    padding: 0px;
+    margin-right: 30px;
+}
+.modal-dialog.modal-dialog-centered.common-modal.end-contract .contact-page .form-group{margin-bottom: 20px;}
+
+/* use display:inline-flex to prevent whitespace issues. alternatively, you can put all the children of .rating-group on a single line */
+#full-stars-example {
+	/* make hover effect work properly in IE */
+	/* hide radio inputs */
+	/* set icon padding and size */
+	/* set default star color */
+	/* set color of none icon when unchecked */
+	/* if none icon is checked, make it red */
+	/* if any input is checked, make its following siblings grey */
+	/* make all stars orange on rating group hover */
+	/* make hovered input's following siblings grey on hover */
+	/* make none icon grey on rating group hover */
+	/* make none icon red on hover */
+    text-align: left;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+ #full-stars-example .rating-group {
+	 display: inline-flex;
+}
+ #full-stars-example .rating__icon {
+	 pointer-events: none;
+}
+ #full-stars-example .rating__input {
+	 position: absolute !important;
+	 left: -9999px !important;
+}
+ #full-stars-example .rating__label {
+	 cursor: pointer;
+	 padding: 0 0.1em;
+	 font-size: 18px;
+}
+ #full-stars-example .rating__icon--star {
+	 color: #27ae60;
+}
+ #full-stars-example .rating__icon--none {
+	 color: rgba(157, 157, 157, 0.5);
+}
+ #full-stars-example .rating__input--none:checked + .rating__label .rating__icon--none {
+	 color: red;
+}
+ #full-stars-example .rating__input:checked ~ .rating__label .rating__icon--star {
+	 color: rgba(157, 157, 157, 0.5);
+}
+ #full-stars-example .rating-group:hover .rating__label .rating__icon--star {
+	 color: #27ae60;
+}
+ #full-stars-example .rating__input:hover ~ .rating__label .rating__icon--star {
+	 color: rgba(157, 157, 157, 0.5);
+}
+ #full-stars-example .rating-group:hover .rating__input--none:not(:hover) + .rating__label .rating__icon--none {
+	 color: rgba(157, 157, 157, 0.5);
+}
+ #full-stars-example .rating__input--none:hover + .rating__label .rating__icon--none {
+	 color: red;
+}
+ 
+.modal-dialog.modal-dialog-centered.common-modal.end-contract .form-wrapper.contact-page-parent-wrapper {
+  padding-top: 0px;
+  height: auto;
+}
+
+.contact-page-parent-wrapper.personal-detail .form-group .bootstrap-select .btn {
+  padding: 10px;
+}
+.contact-page-parent-wrapper.personal-detail .contact-page .form-group label, .edit-personal-details .form-group label {
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 18px;
+  color: #484A47;
+  margin-bottom: 5px;
+  font-family: "Helvetica";
+  padding-left: 15px;
+
+}
+.modal-dialog.modal-dialog-centered.common-modal.end-contract .contact-page-parent-wrapper.personal-detail .contact-page .form-group label, .modal-dialog.modal-dialog-centered.common-modal.end-contract .edit-personal-details .form-group label{
+  text-align: left;
+}
+
+.contact-page .form-group{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.contact-page .form-group textarea {
+  min-height: 111px;
+}
+.contact-page .form-group .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+    width: 100%;
+}
+.contact-page-parent-wrapper.personal-detail .bootstrap-select>.dropdown-toggle.bs-placeholder, .contact-page-parent-wrapper.personal-detail .bootstrap-select>.dropdown-toggle.bs-placeholder:hover{
+  color: rgba(52, 52, 52, 0.5);
+}
+
+.contact-page .form-group .bootstrap-select .btn {
+  background-color: transparent;
+  border-radius: 10px;
+  border: 1px solid #d7d7d7;
+}
+
+.contact-page .form-group .bootstrap-select .dropdown-menu li {
+  border-bottom: 1px solid #d7d7d7;
+}
+
+.contact-page .form-group .bootstrap-select .dropdown-menu.show {
+  border: 1px solid #d7d7d7;
+  border-radius: 10px;
+  padding: 0;
+  margin: 0;
+}
+.contact-page .form-group .bootstrap-select .dropdown-menu li a.selected.active {
+  color: #fff;
+  background-color: #1877f2;
+}
+.contact-page .form-group .bootstrap-select .dropdown-menu li a {
+    color: #484a47;
+}
+.contact-page .form-group .bootstrap-select .dropdown-menu li a span{
+    font-size: 16px;
+}

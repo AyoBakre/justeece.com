@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: justeecedev3
+  name: justeecedev3deploy
+  namespace: justeece
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: justeecedev3
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+      labels:
+        app: justeecedev3
+    spec:
+      containers:
+      - name: dev3justeece
+        env:
+        - name: WORDPRESS_DB_HOST
+          value: newklj-mysql
+        - name: WORDPRESS_DB_PASSWORD
+          value: 1qaz#EDC3edc
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: Always
+        #name: lwt
+        ports:
+        - containerPort: 8000
+          name: port40
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /justeece/justeece/settings.py
+          name: justeece-settings
+      imagePullSecrets:
+      - name: gitlab-regcred
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /opt/dockermounts/justeece/settings_dev3_justeece.py
+          type: File
+        name: justeece-settings

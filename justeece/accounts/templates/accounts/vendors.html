@@ -1,0 +1,71 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/register/provider.css' %}" />
+<div class="row remove-padding justify-content-center">
+  <div class="d-flex flex-column align-items-center price-heading">
+    <div class="cost_price_num text-center mb-5">
+      <p class="price-value">Easy</p>
+      <h1 class="price-text mb-4">Send contracts to your customers</h1>
+      <a class="price-apply-btn" href="#registation-form">Create Account</a>
+    </div>
+    <div class="middle-img mt-4 mb-4">
+      <img
+        alt=""
+        src="{% static 'images/asset1.png' %}"
+        class="center-image-illustration"
+      />
+    </div>
+  </div>
+</div>
+<div class="illust align-items-center">
+  <h4 class="how-it-works-heading pt-5 pb-5">Send in 3 Clicks</h4>
+  <div class="row align-items-center remove-padding">
+    <div class="col-md-4 col-sm-12">
+      <div class="d-flex flex-column align-items-center how-it-works-content">
+        <span class="how-it-works-num mb-4">01</span>
+        <img
+          alt=""
+          src="{% static 'images/Illustration-1.png' %}"
+          class="illustration-img"
+        />
+        <p class="text-center illustration-text mt-4">
+          View the list of 
+          <span class="illustration-text-bold">contract templates</span><br />
+          Choose one
+        </p>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <div class="d-flex flex-column align-items-center how-it-works-content">
+        <span class="how-it-works-num mb-4">02</span>
+        <img
+          alt=""
+          src="{% static 'images/Illustration.png' %}"
+          class="illustration-img"
+        />
+        <p class="text-center illustration-text mt-4" id="registation-form">
+          Enter customer information <br /><span
+            class="illustration-text-bold"
+            >name & email </span>
+            include amount
+        </p>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <div class="d-flex flex-column align-items-center how-it-works-content">
+        <span class="how-it-works-num mb-4">03</span>
+        <img
+          alt=""
+          src="{% static 'images/Illustration-2.png' %}"
+          class="illustration-img"
+        />
+        <p class="text-center illustration-text mt-4">
+          <span
+            class="illustration-text-bold"
+            >Click send</span><br />
+            customer will receive and sign
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

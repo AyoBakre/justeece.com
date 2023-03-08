@@ -1,0 +1,282 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="em">
+  <head>
+    <title></title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="csrf-token" content="{{csrf_token}}">
+    <link rel="stylesheet" href="{% static 'lib/fontawesome/css/all.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'lib/bootstrap/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/topbar/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/common/form/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/register/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/footer/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/common/common.css' %}" />
+    <link rel="icon" type="image/png" href="{% static 'images/logo.jpg' %}"/>
+    <style>
+      .alert-container {
+      font-family: "Helvetica", sans-serif;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    .alert-container {
+      -moz-border-radius: 4px;
+      -webkit-border-radius: 4px;
+      -ms-border-radius: 4px;
+      border-radius: 4px;
+    }
+
+    .alert-container {
+      position: fixed;
+      top: 90px;
+      right: 0%;
+      width: 100%;
+      display: none;
+      z-index: 9999;
+    }
+
+    .alert-container .alert {
+      text-align: center;
+      padding: 17px 10px 17px 10px;
+      height: auto;
+      font-size: 14px;
+      margin: 0px auto;
+      color: #721c24;
+      max-width: 260px;
+      background-color: #f8d7da;
+      border-color: #f5c6cb;
+    }
+
+    #badge{
+      background: #1877f2;
+      padding: 5px;
+      border-radius: 50%;
+      color: white;
+      font-size: 8px;
+    }
+    </style>
+    {% block extrastyles %}{% endblock %}
+    
+  </head>
+  <body>
+    {% if messages %}
+    <div class="alert-container">
+      <div class="alert">
+      {% for message in messages %}
+        {{ message }}
+      {% endfor %}
+      </div>
+    </div>
+    {% endif %} 
+    <div class="navbar-wrapper">
+      <!-- navbar for logged in page start -->
+      <nav class="navbar navbar-expand-md fixed-top navbar-register">
+        <div class="container">
+          <div class="search-container hidden-search-bar">
+            <form action="{% url 'app:search' %}" method="get">
+              <input
+                class="search"
+                id="searchleft"
+                type="search"
+                name="search"
+                placeholder="Search"
+                value="{{search_term}}"
+              />
+              <label class="button searchbutton" for="searchleft"
+                ><img src="{% static 'images/search-icon.svg' %}" alt="search"
+              /></label>
+            </form>
+          </div>
+          <div class="navbar-logo-wrapper">
+            <a class="navbar-brand" href="{% url 'accounts:dashboard' %}"
+              ><div class="logo">
+                <img alt="logo" src="{% static 'images/new_logo.svg' %}" />
+              </div>
+              <!-- <div class="logo-text">
+                <span class="upper-text">JUSTEECE</span
+                ><span class="lower-text">Find <span>Trust</span></span>
+              </div> -->
+              </a>
+          </div>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#collapsibleNavbar"
+            onclick="openNav()"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <form class="form-inline" action="{% url 'app:search' %}" method="get">
+            {% csrf_token %}
+            {% if 'providers' not in request.path %}
+            <input
+              class="form-control mr-sm-2"
+              type="search"
+              placeholder="Search for providers"
+              aria-label="Search"
+              name="search"
+              value="{{search_term}}"
+            />
+            <button class="btn my-2 my-sm-0" type="submit">
+              <img src="{% static 'images/search-icon.svg' %}" alt="search" />
+            </button>
+            {% endif %}
+          </form>
+          <div id="myNav" class="overlay">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+              ><img src="{% static 'images/closeBtn.svg' %}" alt=""
+            /></a>
+            <div class="overlay-content">
+              <a href="#">Home</a>
+              <a href="{% url 'app:about-us' %}">About us</a>
+              {% if request.user.is_authenticated %}
+              <a href="{% url 'accounts:logout' %}">Logout</a>
+               {% else %}
+               <a href="{% url 'accounts:signup' %}">Sign up</a>
+               <a href="{% url 'accounts:login' %}">Log in</a>                
+               {% endif %}
+            </div>
+          </div>
+          <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav mr-auto">
+                {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url  'contracts:my-contracts' %}">Contracts <img src="{% static 'images/arrow_down.svg' %}" alt="">          
+                      {% if request.user.get_contracts_pending > 0 %}
+                      <span id="badge">
+                          {{request.user.get_contracts_pending}}
+                      </span>
+                      {%endif%}
+                    </a>
+                  </li>
+                  {% endif %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'app:about-us' %}">About us</a>
+              </li>
+              {% if request.user.is_authenticated %}
+              <a class="btn btn-primary" href="{% url 'contracts:contract-template' %}">New Contract</a>
+              {% endif %}
+            </ul>
+            {% if request.user.is_authenticated %}
+            <div class="navbar-text">
+                <a class="btn btn-secondry nav_btn" href="{% url 'accounts:logout' %}">
+                  <span>Log out</span>
+                </a>
+                <a class="btn btn-secondry nav_btn" href="{% url 'accounts:profile' %}">
+                  <img
+                    class="card-img-top"
+                    src="{% if request.user.profile_photo %}{{request.user.profile_photo.url}}{% else %}{% static 'images/profile_img.png' %} {% endif %}"
+                    alt=""
+                  />
+                </a>
+              </div>
+              {% else %}
+            <div class="navbar-text">
+              <a class="btn btn-secondry nav_btn" href="{% url 'accounts:login' %}">Log in</a>
+              <a class="btn btn-primary" href="{% url 'accounts:signup' %}">Sign Up</a>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </nav>
+      <!-- navbar for logged in page end -->
+      <!-- navbar for unlogged in page start -->
+      <!-- <nav class="navbar navbar-expand-md fixed-top">
+        <div class="container">
+          <div class="navbar-logo-wrapper">
+            <a class="navbar-brand" href="#"
+              ><div class="logo">
+                <img src="../../Assests/images/new_logo.svg" />
+              </div>
+              <div class="logo-text">
+                <span class="upper-text">JUSTEECE</span
+                ><span class="lower-text">Find <span>Trust</span></span>
+              </div></a
+            >
+          </div>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#collapsibleNavbar"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#">About us</a>
+              </li>
+            </ul>
+            <div class="navbar-text">
+              <button class="btn btn-secondry">Log in</button>
+              <button class="btn btn-primary">Sign in</button>
+            </div>
+          </div>
+        </div>
+      </nav> -->
+      <!-- navbar for unlogged in page end -->
+    </div>
+    {% block content %} {% endblock %}
+    <div class="content-footer">
+        <div class="container content-footer-container">
+          <a class="navbar-brand" href="#"
+            ><div class="logo"><img alt="logo" src="{% static 'images/new_logo.svg' %}" /></div>
+            <!-- <div class="logo-text">
+              <span class="upper-text">JUSTEECE</span
+              ><span class="lower-text">Find <span>Trust</span></span>
+            </div> -->
+            </a>
+          <div class="footer-nav-tabs">
+            <a>Home</a><a href="{% url 'app:about-us' %}">About us</a>
+            {%if request.user.is_staff %}
+            <a href="{% url 'manager:statistics'%}">Statistics</a>
+            {%endif%}
+            {%if request.user%}
+              <a>Logout</a>
+            {%else%}
+              <a>Login</a>
+            {%endif%}
+            
+          </div>
+          <div class="footer-social-tabs">
+            <a><em class="fab fa-facebook-f icon-color"></em></a
+            ><a><em class="fab fa-twitter icon-color"></em></a
+            ><a><em class="fab fa-linkedin-in icon-color"></em></a
+            ><a><em class="fab fa-instagram icon-color"></em></a>
+          </div>
+        </div>
+        <div class="copyright-bar">©2021 Justeece Inc. All rights reserved</div>
+      </div>
+      {% block javascript %}
+      <script src="{% static 'js/jquery.min.js' %}"></script>
+      <script src="{% static 'lib/jquery/index.js' %}"></script>
+      <script src="{% static 'js/common.js' %}"></script>
+      <script src="{% static 'lib/bootstrap/js/bootstrap.bundle.js' %}"></script>
+      <script src="{% static 'lib/fontawesome/js/all.min.js' %}"></script>
+      <script src="{% static 'lib/bootstrap-select-1.13.14/dist/js/bootstrap-select.min.js' %}"></script>
+      <script>
+
+        $(document).ready(function () {
+          var alert = $(".alert-container");
+          alert.hide();
+            alert.slideDown();
+            window.setTimeout(function() {
+              alert.slideUp();
+            }, 2500);
+        })
+
+      </script>
+    {% endblock %}
+    {% block extrascript %}
+    {% endblock extrascript %}
+    </body>
+  </html>

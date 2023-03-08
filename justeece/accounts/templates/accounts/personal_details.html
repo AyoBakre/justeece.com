@@ -1,0 +1,251 @@
+{% extends 'layout.html' %}{% load static %} {% load static %} 
+{% block extrastyles %}
+  <link rel="stylesheet" href="{% static 'css/contractPage/index.css' %}" />
+  <link
+    rel="stylesheet"
+    href="{% static 'lib/bootstrap-select-1.13.14/dist/css/bootstrap-select.min.css' %}"
+  />
+  <link
+    rel="stylesheet"
+    href="{% static 'lib/bootstrap-datepicker-master/dist/css/bootstrap-datepicker.min.css' %}"
+  />
+  <link rel="stylesheet" href="{% static '/css/personal-detail/index.css' %}" />
+  
+  {% if not request.user.profile_added%}
+  <!-- Code to make navbar invisible. attempt to prevent users from not filling data-->
+  <style>
+    .navbar-wrapper,
+    .content-footer-container {
+      display: none !important;
+    }
+  
+    .content-wrapper {
+      margin-top: -120px;
+    }
+  </style>
+  {% endif %} {% endblock %} {% block content %}
+  <div class="content-wrapper">
+    <div class="container">
+      <div class="form-wrapper contact-page-parent-wrapper personal-detail">
+        <h2 class="form-header">Personal details</h2>
+        <h5 class="form-header-small">{{request.user.email}}</h5>
+        <form
+          class="contact-page"
+          method="POST"
+          action=""
+          id="personal_details_form"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="profilephoto">Profile Photo</label>
+            <div class="drop-zone">
+              <span class="drop-zone__prompt"
+                >Drag and drop or
+                <span class="browse">browse</span></span
+              >
+              <input
+                type="file"
+                value="{% if request.user.profile_photo %}{{request.user.profile_photo.url}}{% else %}{% static 'images/profile_img.png' %} {% endif %}"
+                class="drop-zone__input"
+                name="{{form.profile_photo.name}}"
+                accept="image/*"
+              />
+            </div>
+          </div>
+          <div class="invalid-tooltip-message text-danger">
+            {{form.profile_photo.errors.0}}
+          </div>
+          <div class="form-group">
+            <label for="lname">Phone Number</label>
+            <input
+              value="{% if form.phone_number.value %}{{form.phone_number.value}}{% endif %}"
+              type="tel"
+              name="{{form.phone_number.name}}"
+              placeholder="Enter Phone Number"
+              class="form-field form-control"
+            />
+          </div>
+          <div class="invalid-tooltip-message text-danger">
+            {{form.phone_number.errors.0}}
+          </div>
+      <div class="form-group">
+            <label for="subject">Occupation</label>
+            <input
+              id="subject"
+              name="{{form.occupation.name}}"
+              placeholder="Enter your Occupation here..."
+              class="form-field form-control"
+              value="{% if form.occupation.value %}{{form.occupation.value}}{% endif %}"
+            />
+          </div>
+          <div class="invalid-tooltip-message text-danger">
+            {{form.occupation.errors.0}}
+          </div>
+
+          <input
+              id="country"
+              name="{{form.country.name}}"
+              class="form-field form-control"
+              value="{% if form.country.value %}{{form.country.value}}{% endif %}"
+              type="hidden"
+            />
+            <input
+            id="city"
+            name="{{form.city.name}}"
+            class="form-field form-control"
+            value="{% if form.city.value %}{{form.city.value}}{% endif %}"
+            type="hidden"
+          />
+          <div class="form-group">
+            <label for="subject">About your business/occupation</label>
+            <textarea
+              id="subject field"
+              name="{{form.about_me.name}}"
+              placeholder="Describe your business, minimum of 50 characters"
+              class="form-field form-control"
+              onkeyup="countChar(this)"
+            >{% if request.user.about_me %}{{request.user.about_me}}{% endif %}</textarea>
+            <p
+              class="ml-3 mt-1 char_counter"
+              style="font-size: 10px; padding: 0; margin: 0"
+            >
+              Characters (Not less than 50): <span id="charNum">0</span>
+            </p>
+          </div>
+          <div class="invalid-tooltip-message text-danger">
+            {{form.about_me.errors.0}}
+          </div>
+  
+          <div class="form-group">
+            <label for="subject">
+              <em class="fab fa-instagram icon-color"></em> Instagram
+              Username</label
+            >
+            <input
+              id="subject"
+              name="{{form.ig_username.name}}"
+              placeholder="Enter your Instagram username here..."
+              class="form-field form-control"
+              value="{% if form.ig_username.value %}{{form.ig_username.value}}{% endif %}"
+            />
+          </div>
+          <div class="invalid-tooltip-message text-danger">
+            {{form.ig_username.errors.0}}
+          </div>
+  
+          <div class="form-group">
+            <label for="subject">
+              <em class="fab fa-twitter icon-color"></em> Twitter
+              Handle</label
+            >
+            <input
+              id="subject"
+              name="{{form.twitter_handle.name}}"
+              placeholder="Enter your Twitter handle here..."
+              class="form-field form-control"
+              value="{% if form.twitter_handle.value %}{{form.twitter_handle.value}}{% endif %}"
+            />
+          </div>
+          <div class="invalid-tooltip-message text-danger">
+            {{form.twitter_handle.errors.0}}
+          </div>
+  
+          <div class="buttons-wrapper">
+            <button type="submit" class="btn btn-primary form-btn">
+              Save and continue
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-primary form-btn back_btn"
+            >
+              Back to dashboard
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endblock %} {% block extrascript %}
+  <script src="{% static '/js/personal-detail.js' %}"></script>
+  <script>
+    $(document).ready(function () {
+      // Adding more language
+      $("#add_language").on("click", function () {
+        if (!$("#language_div").children().eq(1).hasClass("d-none")) {
+          $("#language_div").children().last().removeClass("d-none");
+        }
+        $("#language_div").children().eq(1).removeClass("d-none");
+      });
+  
+      loadDropdowns = (url, data, load_id) => {
+        $.ajax({
+          url: url,
+          async: false,
+          type: "GET",
+          data: data,
+          success: function (data) {
+            const options = data.dropdown_options;
+            $("#" + load_id).empty();
+            $("#" + load_id).append(
+              "<option value='' selected>Select Option</option>"
+            );
+  
+            if (data.dropdown_options.length > 0) {
+              for (const key in options) {
+                $("#" + load_id)
+                  .append(
+                    "<option value='" +
+                      options[key][0] +
+                      "' data-value='" +
+                      options[key][2] +
+                      "'>" +
+                      options[key][1] +
+                      "</option>"
+                  )
+                  .trigger("change");
+              }
+              $(".selectpicker").selectpicker("refresh");
+            }
+          },
+        });
+      };
+  
+      $("#country").on("change", function (e) {
+        id = $(this).val();
+        if (id) {
+          url = "{% url 'accounts:dynamic-dropdonws' %}";
+          data = { id: id, dropdown_type: "CITY" };
+          loadDropdowns(url, data, "city");
+        }
+      });
+    }); //ready
+  
+    $(".back_btn").on("click", function () {
+      window.location.href = "/accounts/dashboard";
+    });
+  </script>
+  <script>
+    function countChar(val) {
+      var len = val.value.length;
+      if (len >= 2000) {
+        val.value = val.value.substring(0, 2000);
+      } else {
+        $('#charNum').text(len);
+      }
+    };
+  </script>
+  <script>
+    function ipLookUp () {
+      fetch('https://api.geoapify.com/v1/ipinfo?apiKey=f46b0052aa4c48a6a7c0d58ffb7bc90f')
+        .then(resp => resp.json())
+        .then((userLocationData) => {
+          $("#country").val(userLocationData.country.name);
+          $("#city").val(userLocationData.city.name);
+	        console.log(userLocationData.city.name);
+          });
+    }
+    ipLookUp()
+  </script>
+  {% endblock %}
+  

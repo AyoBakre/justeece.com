@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}{% load static %} {% load static %} 
+{% block extrastyles %}
+  <link rel="stylesheet" href="{% static '/css/personal-detail/index.css' %}" />  
+{% endblock %} 
+
+{% block content %}
+  <div class="content-wrapper">
+    <div class="container">
+      <div class="row ref-wrapper">
+        <div class="col-md-6 border-right d-flex justify-content-center text-center">
+            <div class="ref-head">
+              <img src="{% static 'images/star.svg' %}" alt="">
+              <h3>Request a Reference</h3>
+              <img id='trophy' src="{% static 'images/trophy.svg' %}" alt="">
+              <p>Why referencing is so important?</p>
+              <ul>
+                <li><img src="{% static 'images/single_star.svg' %}" alt=""><h5>Avoids plagiarism</h5></li>
+                <li><img src="{% static 'images/single_star.svg' %}" alt=""><h5>Aknowledges prior research</h5></li>
+                <li><img src="{% static 'images/single_star.svg' %}" alt=""><h5>Adds credibility</h5></li>
+              </ul>
+            </div>
+            
+        </div>
+        <div class="col-md-6 d-flex justify-content-center text-center">
+          <div class="ref-form">
+            <p id="top-para">Providers with references are 7 times more <br>
+              likely to be hired</p>
+            <p id="middle-para">Reference can be friends,  <br>
+              family or past clients</p>
+              <form action="{% url 'accounts:send-reference-email' %}" method="post">
+                {% csrf_token %}
+                <div class="form-row">
+                  <div class="col-md-6 mb-3">
+                    <label for="validationServer01">Reference Email</label>
+                    <input type="email" class="form-control" id="" value="" name="email" required>
+                    
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="validationServer02">Reference Name</label>
+                    <input type="text" class="form-control" id="" value="" name='name' required>
+                    
+                  </div>
+                </div>
+                <button id='ref-btn' class="btn btn-primary float-right" type="submit">Submit form</button>
+                <div class="buttons-wrapper" style="margin-top: 100px;">
+                  <a id="ref-con" href="{% url 'accounts:dashboard'%}">I’ll do it later</a>
+                </div>
+                
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

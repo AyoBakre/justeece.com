@@ -1,0 +1,25 @@
+<div class="modal-body">
+    <div class="form-group">
+        <label for="end">Let the client know why you are rejecting this contract</label>
+        <select id="end" name="end" class="selectpicker"> 
+            <option value="" selected disabled>Choose the reason</option> 
+            <option value="australia">Australia</option>
+            <option value="canada">Canada</option>
+            <option value="usa">USA</option>
+        </select>
+        </div>
+    
+        <div class="form-group">
+        <label for="subject">Message to client (optional)</label>
+        <textarea
+            id="subject"
+            name="{{feedback_form.feedback.name}}"
+            placeholder=""
+            class="form-field form-control testimonial_feedback"
+        ></textarea>
+        </div>
+        <p class="error_text d-none"> Please fill the feedback</p>
+        <input type="hidden" name="{{form.status.name}}" value="7"> 
+        <input type="hidden" name="{{form.contract.name}}" value="{{contract.id}}"> 
+    </div>
+    

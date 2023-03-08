@@ -1,0 +1,273 @@
+.contact-page-parent-wrapper.personal-detail .form-header-small {
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 32px;
+    text-align: center;
+    color: #484A47;
+    padding: 0px;
+    margin-bottom: 40px;
+    opacity: 0.7;
+}
+
+.contact-page-parent-wrapper.personal-detail .form-header {
+    margin-bottom: 20px;
+}
+
+.contact-page-parent-wrapper.personal-detail .contact-page .form-group label,.edit-personal-details .form-group label {
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 18px;
+    color: #484A47;
+    margin-bottom: 5px;
+}
+
+.contact-page-parent-wrapper.personal-detail .bootstrap-select>.dropdown-toggle.bs-placeholder,
+.contact-page-parent-wrapper.personal-detail .bootstrap-select>.dropdown-toggle.bs-placeholder:hover {
+    color: rgba(52, 52, 52, 0.5);
+}
+
+.contact-page-parent-wrapper.personal-detail input,
+.contact-page-parent-wrapper.personal-detail textarea {
+    background-color: transparent !important;
+}
+
+.contact-page-parent-wrapper.personal-detail .drop-zone {
+    max-width: 100%;
+    height: 300px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: rgba(52, 52, 52, 0.5);
+    border: 1px dashed #1877F2;
+    box-sizing: border-box;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #F2F8FF;
+}
+
+.contact-page-parent-wrapper.personal-detail input::placeholder,
+.contact-page-parent-wrapper.personal-detail textarea::placeholder {
+    color: rgba(52, 52, 52, 0.5);
+}
+
+.contact-page-parent-wrapper.personal-detail .form-group .bootstrap-select .btn {
+    padding: 10px;
+}
+
+.contact-page-parent-wrapper.personal-detail .browse {
+    color: #1877F2;
+    text-decoration: underline;
+}
+
+.contact-page-parent-wrapper.personal-detail .drop-zone--over {
+    border-style: solid;
+}
+
+.contact-page-parent-wrapper.personal-detail .add-lang-btn {
+    width: auto;
+    display: flex;
+    align-items: center;
+    padding: 0px;
+    margin: 0px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 21px;
+    color: #484A47;
+}
+
+.contact-page-parent-wrapper.personal-detail .add-lang-btn svg {
+    margin-right: 14px;
+    position: relative;
+    top: -2px;
+}
+
+.contact-page-parent-wrapper.personal-detail .add-lang-btn:focus {
+    outline: none;
+}
+
+.contact-page-parent-wrapper.personal-detail .drop-zone__input {
+    display: none;
+}
+
+.contact-page-parent-wrapper.personal-detail .drop-zone__thumb {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #f2f8ff;
+    background-size: cover;
+    position: relative;
+}
+
+.contact-page-parent-wrapper.personal-detail .drop-zone__thumb::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 5px 0;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.75);
+    font-size: 14px;
+    text-align: center;
+}
+.profile-detail-description.personal{border-bottom: none;}
+.edit-personal-details .form-header-small{
+    font-size: 22px;
+    font-weight: 700;
+}
+.edit-personal-details p{
+    margin: 0px 0px 30px 0px;
+    font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 24px;
+color: #484A47;
+}
+.edit-personal-details .btn.btn-outline-primary.form-btn{
+    max-width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px auto 55px auto;
+}
+.edit-personal-details .btn.btn-outline-primary.form-btn:hover svg path{fill: #ffffff;}
+.edit-personal-details .btn.btn-outline-primary.form-btn svg{margin-right: 10px;}
+.edit-personal-details .btn.btn-outline-primary.form-btn.no-border{border: none;}
+.edit-personal-details .form-group{position: relative;}
+.edit-personal-details .form-group .send-emailbox{
+display: flex;
+}
+.edit-personal-details .form-group .send-emailbox input{
+    width: 100%;
+    border-radius: 0px;
+}
+.edit-personal-details .form-group .send-emailbox button{
+    width: 125px;
+    border-radius: 0px;
+}
+.profile-btn.no-border{
+    background-color: transparent !important;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.profile-btn.no-border svg{margin-right: 8px;margin-top: 0px;}
+@media(max-width:767px){
+    .contact-page-parent-wrapper.personal-detail .form-header-small {
+        margin-bottom: 30px;
+    }
+    
+    .contact-page-parent-wrapper.personal-detail .form-header {
+        margin-bottom: 10px;
+    }
+    .contact-page-parent-wrapper.personal-detail .add-lang-btn svg{margin-right: 8px;top: -1px;}
+    .edit-personal-details .form-group .send-emailbox button{
+        width: 95px;
+    }
+    .edit-personal-details .btn.btn-outline-primary.form-btn{
+        max-width: 240px;
+        margin: 0px auto 45px auto;
+    }
+}
+
+.ref-wrapper{
+    margin-top: 70px;
+}
+
+.ref-head img{
+    width: 30px;
+    float: left;
+    margin-left: 50px;
+}
+.ref-head h3{
+font-size: 30px;
+text-align: center;
+color: rgba(0, 0, 0, 0.5);
+width: 392px;
+}
+
+#trophy{
+width: 343px;
+padding-top: 50px;
+}
+
+.ref-head p{
+font-size: 30px;
+text-align: center;
+color: #1A76E1;
+padding-top: 470px;
+font-weight: 800;
+padding-bottom: 20px;
+}
+
+.ref-head ul {
+    list-style-type: none;
+  }
+
+.ref-head li{
+    padding-bottom: 10px;
+}
+
+.ref-head ul img {
+    width: 30px;
+    margin-right: 20px;
+}
+
+.ref-head li h5{
+width: 352px;
+font-size: 20px;
+color: #619ADC;
+text-align: left;
+}
+
+.ref-form{
+    margin-top: 150px;
+}
+
+.ref-form #top-para{
+font-size: 18px;
+color: #1A76E1;
+}
+
+.ref-form #middle-para{
+    margin-top: 20px;
+font-size: 14px;
+color: rgba(0, 0, 0, 0.7);
+}
+
+.ref-form form{
+    margin-top: 60px;
+}
+
+.ref-form form input{
+    box-sizing: border-box;
+height: 45px;
+border: 1px solid #D8EBFF;
+border-radius: 8px;
+}
+
+#ref-btn{
+background: #1A76E1;
+border-radius: 8px;
+}
+
+#ref-con{
+color: rgba(0, 0, 0, 0.32);
+border: none;
+padding: 0;
+background: none;
+margin-top: 100px;
+font-size: 32px;
+}

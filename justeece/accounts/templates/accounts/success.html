@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}{% load static %} {% load static %} 
+{% block extrastyles %}
+  <link rel="stylesheet" href="{% static 'css/contractPage/index.css' %}" />
+  <link
+    rel="stylesheet"
+    href="{% static 'lib/bootstrap-select-1.13.14/dist/css/bootstrap-select.min.css' %}"
+  />
+  <link
+    rel="stylesheet"
+    href="{% static 'lib/bootstrap-datepicker-master/dist/css/bootstrap-datepicker.min.css' %}"
+  />
+  <link rel="stylesheet" href="{% static '/css/personal-detail/index.css' %}" />
+  
+  
+  <style>
+    .success img{
+      width: 100px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      margin-top: -50px;
+    }
+
+    .success h1{
+      font-size: 32px;
+      text-align: center;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      margin-top: 75px;
+      padding: 0;
+      width: 750px;
+    }
+  </style>
+ {% endblock %} {% block content %}
+      <div class="content-wrapper">
+        <div class="success">
+          <img src="{% static 'images/check.png' %}" alt="">
+          <h1>
+            You have successfully added a Reference for 
+            <br>{{email}}
+          </h1>
+        </div>
+      </div>
+  {% endblock %}
+  

@@ -1,0 +1,110 @@
+{% extends 'layout.html' %}{% load static %}
+{% block extrastyles %}
+<link rel="stylesheet" href="{% static 'css/landingPage/index.css' %}" />
+<link rel="stylesheet" href="{% static 'css/modal/index.css' %}" />
+<link rel="stylesheet" href="{% static 'css/my-contract/index.css' %}" />
+<style>
+.container.my-contract-wrapper.search {
+    max-width: 1080px;
+}
+
+
+.container.my-contract-wrapper.search .table tr:nth-child(even) {
+    background-color: #f7f7f7;
+}
+
+.container.my-contract-wrapper.search .table tr td {
+    border-top: none;
+    border-bottom: 1px solid #f7f7f7;
+}
+
+.container.my-contract-wrapper.search .table {
+    border-collapse: separate;
+    border-spacing: 0px 20px;
+}
+
+</style>
+{% endblock %}
+{% block content %}
+    <div class="content-wrapper">
+      <div class="container my-contract-wrapper search">
+        <div class="form-wrapper contact-page-parent-wrapper personal-detail">
+
+          <div class="white-box">
+        
+            
+            <table aria-describedby="mysdesc" class="table">
+            <th scope=""></th>
+              <tbody id="table">
+                {% if people %}
+                    {% for peep in people %}
+                        <tr>
+                        <td>
+                            <a href="{% url 'accounts:profile' %}?user={{peep.id}}">
+                                <p class="service">
+                                    {{peep.first_name}} {{peep.last_name}}
+                                    <span class="new">{{peep.city}}, {{peep.country}}</span>
+                                </p>
+                                <!-- <p class="date">
+                                    Apr 28, 2021 - May 3, 2021
+                                </p> -->
+                                <p>
+                                    {{peep.occupation}}
+                                </p>
+                            </a>
+
+                            <p>
+                                {% if peep.reference_for_user.count > 0 %}
+                                    <div>
+                                        {% if peep.reference_for_user.count is 1 %}
+                                            <small>Referred By {{ peep.reference_for_user.count }} Person </small>
+                                        {% else %}
+                                            <small>Referred By {{ peep.reference_for_user.count }} People </small>
+                                        {% endif %} 
+                                            <div>
+                                            {% for i in peep.reference_for_user.all %}
+                                                <img src="{{ i.profile_photo.url }}" alt="" class="provider-section-img">
+                                            {% endfor %}
+                                            </div>
+                                    </div>
+
+                                {% else %}
+                                    <small>No References added</small>
+                                {% endif %}
+                            </p>
+
+                        </td>
+                        <td>
+                            <a href="{% url 'accounts:profile' %}?user={{peep.id}}">
+                                <div class="name-box">
+                                    <div class="content-box">
+                                        <!-- <p>Andrew Kutsan</p> -->
+                                        <p class="email">{{peep.email}}</p>
+                                        <p>{{peep.phone_number}}</p>
+                                    </div>
+                                    <div class="img-box">
+                                        <img src="{% if peep.profile_photo %}{{peep.profile_photo.url}}{% else %}{% static 'images/profile_img.png' %} {% endif %}" alt="profile" />
+                                    </div>
+                                </div>
+                            </a>
+
+                        </td>
+                        </tr>     
+                    {% endfor %} 
+                {% else %}
+                <tr>
+                    <td style="text-align: center;">No Result Found</td>
+                </tr>
+                {% endif %}      
+              </tbody>
+            </table>
+          </div>
+          <!-- <div class="btn-group">
+              <button type="button" class="show-more-btn">
+                Show more
+              </button>
+          </div> -->
+        </div>
+      </div>
+    </div>
+{% endblock %}

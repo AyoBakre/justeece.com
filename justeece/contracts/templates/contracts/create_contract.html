@@ -1,0 +1,189 @@
+{% extends 'layout.html' %}{% load static %}
+{% block extrastyles %}
+    <link rel="stylesheet" href="{% static 'css/contractPage/index.css' %}" />
+    <link
+    rel="stylesheet"
+    href="{% static 'lib/bootstrap-select-1.13.14/dist/css/bootstrap-select.min.css' %}"
+    />
+    <link
+    rel="stylesheet"
+    href="{% static 'lib/bootstrap-datepicker-master/dist/css/bootstrap-datepicker.min.css' %}"
+    />
+{% endblock %}
+{% block content %}
+
+<div class="content-wrapper">
+    <div class="container">
+    <div class="form-wrapper contact-page-parent-wrapper">
+        <h2 class="form-header">Create new contract</h2>
+        
+        <h5 class="form-header-small">
+        Creating a contract with <span>{{email}}</span>
+        </h5>
+        <form class="contact-page" action="/contracts/create_contract" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="lname">Contract Name</label>
+                <input
+                type="text"
+                placeholder="Type here"
+                name="{{form.contract_name.name}}"
+                class="form-field form-control"
+                value="{% if form.contract_name.value %}{{form.contract_name.value}}{% endif %}"
+                />
+                {{form.contract_name.errors.0}}
+            </div>
+            <div class="form-group">
+            <label for="fname">Contract Type</label>
+            <select id="country" name="{{form.contract_type.name}}" class="selectpicker">
+                {% for dict_item in contract_type %}
+                {% if dict_item.name == selected_contract %}
+
+                    <option id="{{dict_item.id}}" value="{{dict_item.name}}" selected>{{dict_item.name}}</option>
+                {% else %}
+                    <option id="{{dict_item.id}}" value="{{dict_item.name}}" >{{dict_item.name}}</option>
+                {% endif %}
+                
+                {% endfor %}
+            </select>
+            <p>{{form.contract_type.errors.0}}</p>
+        </div>
+
+        <div class="form-group">
+            <label for="lname">Subcategory</label>
+            <input
+            type="text"
+            placeholder="Type here"
+            name="{{form.subcategory.name}}"
+            class="form-field form-control"
+            value="{% if form.subcategory.value %}{{form.subcategory.value}}{% endif %}"
+            />
+            {{form.subcategory.errors.0}}
+        </div>
+
+        <div class="form-group">
+            <label for="country">Contract start date</label>
+            <div
+            class="input-group date custom-datepicker"
+            data-date-format="yyyy-mm-dd"
+            >
+            <input
+                class="form-field form-control"
+                type="text"
+                placeholder="Select date"
+                name="{{form.contract_start_date.name}}"
+                autocomplete="off"
+                value = "{% if form.contract_start_date.value %}{{form.contract_start_date.value|date:"Y-m-d"}}{% endif %}"
+            />
+            <span class="input-group-addon"
+                ><img src="{% static 'images/calender.svg' %}" alt="calender"
+            /></span>
+            </div>
+            {{form.contract_start_date.errors.0}}
+        </div>
+
+        <div class="form-group">
+            <label for="country">Contract end date</label>
+
+            <div
+            class="input-group date custom-datepicker"
+            data-date-format="yyyy-mm-dd"
+            data
+            >
+            <input
+                class="form-field form-control"
+                type="text"
+                placeholder="Select date"
+                name="{{form.contract_end_date.name}}"
+                autocomplete="off"
+                value="{% if form.contract_end_date.value %}{{form.contract_end_date.value|date:"Y-m-d"}}{% endif %}"
+            />
+            <span class="input-group-addon"
+                ><img src="{% static 'images/calender.svg' %}" alt="calender"
+            /></span>
+            </div>
+            {{form.contract_end_date.errors.0}}
+        </div>
+        <div class="form-group">
+            <label for="subject">Contract Summary</label>
+            <textarea
+            id="subject"
+            name="{{form.summary.name}}"
+            placeholder="Describe the service you want to be provided"
+            class="form-field form-control">{% if form.summary.value %}{{form.summary.value}}{% endif %}</textarea>
+            {{form.summary.errors.0}}
+        </div>
+        <div class="contact-checkbox form-group checkbox">
+            <input
+            type="checkbox"
+            id="fcheckbox"
+            name="{{form.payment_included.name}}"
+            class="form-checkbox"
+            value="True"
+            {% if form.payment_included.value == True %}checked{% endif %}
+            />
+            <label for="fcheckbox"
+            ><span class="terms-condition-text"
+                >Include Payment</span
+            ></label
+            >
+        </div>
+        <!-- field as per second contact page start -->
+        <div class="form-group right-align-wrapper payment_div d-none">
+            <label for="amount">Amount</label>
+            <input
+            type="text"
+            placeholder="Type here"
+            name="{{form.amount.name}}"
+            class="form-field form-control"
+            autocomplete="off"
+            value="{% if form.amount.value %}{{form.amount.value}}{% endif %}"
+            />
+            <span class="right-align-image"
+            >$</span>
+        </div>
+        <div class="form-group">
+            <label for="created_with_email">Contract With</label>
+            <input
+            type="text"
+            placeholder="Type here"
+            name="created_with"
+            class="form-field form-control"
+            value="{{email}}"
+            readonly 
+
+            />
+            {{form.created_with.email.errors.0}}
+        </div>
+        <!-- field as per second page end -->
+        <div class="buttons-wrapper">
+            <button type="submit" class="btn btn-primary form-btn">
+            Create contract</button
+            ><button type="submit" class="btn btn-outline-primary form-btn back_btn">
+            Back to the provider's page
+            </button>
+        </div>
+        </form>
+    </div>
+    </div>
+</div>
+{% endblock %}
+{% block extrascript %}
+    <script src="{% static 'js/contract.js' %}"></script>
+    <script src="{% static 'lib/bootstrap-datepicker-master/dist/js/bootstrap-datepicker.min.js' %}"></script>
+    <script>
+        $("#fcheckbox").change(function() {
+            if(this.checked) {
+                //Do stuff
+                $(".payment_div").removeClass('d-none')
+            }
+            else {
+                $(".payment_div").addClass('d-none')
+            }
+        });
+
+        $('.back_btn').on('click',function(){
+        window.location.href = '/accounts/dashboard'
+      })  
+    </script>
+{% endblock %}

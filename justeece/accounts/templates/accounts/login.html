@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}{% load static %}
+
+{% block content %}
+    <div class="content-wrapper">
+      <div class="container">
+        <div class="form-wrapper">
+          <h2 class="form-header">Log in</h2>
+          <form method="POST" class="register-form">
+            {% csrf_token %}
+            <div class="form-group">
+              <input
+                type="text"
+                id="femail"
+                name="{{form.email.name}}"
+                placeholder="Email"
+                class="form-field form-control"
+                value="{% if form.email.value %}{{form.email.value}}{% endif %}"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="password"
+                id="fpassword"
+                name="{{form.password.name}}"
+                placeholder="Password"
+                class="form-field form-control"
+              />
+            </div>
+            {% if form.non_field_errors %}
+            <div class="non-field-errors">
+              {% for err in form.non_field_errors %}{{error.code}}
+              {% if err == "PLEASE_ACTIVATE" %}
+                <p class="text-danger">Seems like your account is not activated yet, please <a style="color:green" href="{% url 'accounts:resendverificationemail' email %}" >'click here'</a> to receive the account activation email again.</p>
+                {% else %}
+                <p class="text-danger">{{ err }}</p>
+                {% endif %}
+              {% endfor %}
+            </div>
+            {% endif %}
+            <button type="submit" class="btn btn-primary form-btn">
+              Login
+            </button>
+            <div class="terms-condition-text already-loggedin">
+              Don't have an account? <a href="{% url 'accounts:signup' %}"><span>Sign up</span></a>
+            </div>
+            <div class="terms-condition-text already-loggedin forget-password">
+              <a href="{% url 'accounts:forgot-password' %}"><span>Forget Password?</span></a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+{% endblock %}

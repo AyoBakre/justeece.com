@@ -1,0 +1,179 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block extrastyles %}
+<link rel="stylesheet" href="{% static 'css/contractTemplate/main.css' %}" />
+{% endblock %}
+{% block content %}
+    <div class="content-wrapper">
+      <div class="container my-contract-wrapper">
+        <div class="mx-auto header">
+            <h1>Template Contracts</h1>
+            <a href="{% url 'accounts:dashboard' %}">
+            <div class="mx-auto header-custom d-flex align-items-center">
+                <Span>Custom Contracts</span>
+                <img src="{% static 'images/arrow-right.svg' %}" alt="" />
+            </div>
+            </a>
+        </div>
+
+        <div class="contract-links mx-auto" id="contract-links">
+            <ul>
+                {% for contract_template_tag in contract_template_tags %}
+                <li> <a href="{% url 'contracts:templatesearch' %}?searc={{contract_template_tag.id}}">{{contract_template_tag.tag}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="contract-search-box mx-auto" id="contract-search">
+            <form action="{% url 'contracts:templatesearch' %}" method="get">
+                {% csrf_token %}
+                    <div class="input-group rounded search-box mx-auto">
+                        <input type="search" class="form-control rounded" placeholder="Search template contract" aria-label="Search"
+                        aria-describedby="search-addon" id= "search" value="{{template_search_term}}" name="search" />
+                     <span class="d-flex align-items-center">{{contract_templates.count}} in total</span>
+                    </div>
+            </form>
+        </div>
+
+        <div class="contract-cards">
+            <div class="row mx-auto">
+                {% for contract_template in contract_templates %}
+                <a href="#" data-toggle="modal" data-target="#modal{{contract_template.id}}">
+                <div class="col-md-4 card">
+                    <div class="card-logo">
+                        <img src="{{contract_template.logo.url}}" alt="">
+                    </div>
+                    <div class="card-head">
+                        <h2>{{contract_template.title}}</h2>
+                    </div>
+                    <div class="card-bodyy">
+                        <p>{{contract_template.description | safe}}
+                        </p>
+                    </div>
+                    <a href="#" data-toggle="modal" data-target="#modal{{contract_template.id}}"><div class="card-logo-down">
+                        <img src="{% static 'images/Vector 17.svg' %}" alt="">
+                    </div></a>
+                </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="modal-container">
+          {% for contract_template in contract_templates %}
+        {% include "contracts/partials/contract_template_modal.html" %}
+          {% endfor %}
+        </div>
+
+      </div>
+    </div>
+{% endblock %}
+
+{% block extrascript %}
+    <script src="{% static 'lib/bootstrap-datepicker-master/dist/js/bootstrap-datepicker.min.js' %}"></script>
+
+    <script>
+        $(function () {
+            $("select").selectpicker();
+          });
+          $(function () {
+            $(".date.custom-datepicker")
+              .datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                clearBtn: true,
+                orientation: "auto",
+              })
+              .datepicker();
+          });
+    </script>
+
+    <script>
+
+        $(document).ready(function () {
+
+          allElements = document.getElementsByClassName('res-user');
+          for (let i = 0; i < allElements.length; i++) {
+            document.getElementsByClassName('res-user')[i].innerText = document.getElementsByClassName('request-user')[0].value;
+            document.getElementsByClassName('contract-country')[i].innerText = document.getElementsByClassName('request-user-con')[0].value;
+            document.getElementsByClassName('contract-city')[i].innerText = document.getElementsByClassName('request-user-city')[0].value;
+          };
+          
+          document.getElementById('contract-type').innerText = document.getElementById('rcp-user-occ').value
+          document.getElementById('contract-citys').innerText = document.getElementsByClassName('request-user-city')[0].value
+          
+          $('.search-bar').focus(function () {
+            console.log("focus")
+            if ($('.prediction-item').length > 0) {
+              $('.output').slideDown();
+            }
+          })
+          
+          
+          $('.search-bar').blur(function () {
+            console.log("blur")
+              $('.output').slideUp();
+            
+          })
+
+          $(".search-bar").keyup(function () {
+            console.log("keyup")
+            var search = $(this).val();
+            if (search != "") {
+  
+              $.ajax({
+                url: '/accounts/user_list/' + search,
+                type: 'get',
+                data: { search: search },
+                dataType: 'json',
+                success: function (response) {
+                  var len = response.length;
+                  $(".searchResult").empty();
+                  for (var i = 0; i < len; i++) {
+                    var id = response[i]['id'];
+                    var email = response[i]['email'];
+  
+                    $(".searchResult").append('<li class="prediction-item"><span class="prediction-text" value=' + id + '>' + email + '</span></li>');
+                    // $("#searchResult").append("<li value='"+id+"'>"+email+"</li>");
+                  }
+                  if (len === 0) {
+                    $(".searchResult").append('<li class="prediction-item noclick"><span class="prediction-text" value="No result found">No result found</span></li>');
+  
+                  }
+  
+                  // binding click event to li
+                  $(".searchResult li").bind("click", function () {
+                    $('.search-bar').val(this.childNodes[0].innerHTML);
+                    $('.output').slideUp();
+                  });
+                  $('.output').slideDown();
+  
+                }
+              });
+            }
+
+          });
+          
+          $("body").change(function(){
+            allElements = document.getElementsByClassName('startdate');
+            for (let i = 0; i < allElements.length; i++) {
+              document.getElementsByClassName('contract-date')[i].innerText = document.getElementsByName('contract_start_date')[i].value;
+              document.getElementsByClassName('contract-recp')[i].innerText = document.getElementsByClassName('first_name')[i].value;
+              document.getElementsByClassName('contract-recip')[i].innerText = document.getElementsByClassName('last_name')[i].value;
+              document.getElementsByClassName('contract-amt')[i].innerText = document.getElementsByClassName('total-input')[i].value;
+              document.getElementsByClassName('contract-am')[i].innerText = document.getElementsByClassName('initial-amt')[i].value;
+              document.getElementsByClassName('summary')[i].value = document.getElementsByClassName('summary-ini')[i].innerHTML
+            };
+          });
+
+          $(".contract_end").change(function(){
+            document.getElementById('contract-end-date').innerText = document.getElementsByClassName('contract_end')[0].value
+          });
+
+        });
+        
+      </script>
+
+{% endblock %}
+
+
