@@ -2,15 +2,16 @@
 
 A live web application with over 1000 users that will hold agreements between parties, from anywhere in the world and do anything possible to ensure that all parties honor the terms of agreements.
 
-DEFAULT LIBRARIES VERSION
-    Python version: 3.7.9
-    Django version: 2.2.22
 
-INITIAL DEPLOYMENT STEPS:.
-    -- Add keys in .env file
-    -- Install python and django
-    -- Create virtual environment 
-    -- Activate virtual environment
-    -- Install requirements.txt 
-    -- Run command "python manage.py migrate"
-    -- Run server using command "python manage.py runserver"
+DEFAULT LIBRARIES VERSION <br />
+    Python version: 3.7.9 <br />
+    Django version: 2.2.22
+<br /><br />
+INITIAL DEPLOYMENT STEPS:.<br />
+    -- Add keys in .env file<br />
+    -- Install python and django<br />
+    -- Create virtual environment <br />
+    -- Activate virtual environment<br />
+    -- Install requirements.txt <br />
+    -- Run command "python manage.py migrate"<br />
+    -- Run server using command "python manage.py runserver"<br />
