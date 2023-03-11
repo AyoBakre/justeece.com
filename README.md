@@ -1,7 +1,8 @@
 # justeece
 
-A live web application with over 1000 users that will hold agreements between parties, from anywhere in the world and do anything possible to ensure that all parties honor the terms of agreements.
+![justeece logo](https://justeece.com/static/images/new_logo.svg)
 
+A live web application with over 1000 users that will hold agreements between parties, from anywhere in the world and do anything possible to ensure that all parties honor the terms of agreements.
 
 DEFAULT LIBRARIES VERSION <br />
     Python version: 3.7.9 <br />
